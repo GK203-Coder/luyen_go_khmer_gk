@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện gõ Tiếng Khmer - Giàu Kiên</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Biến màu sắc cho Sáng/Tối */
+        :root {
+            --bg-body: #e2e8f0;
+            --bg-container: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --primary: #3b82f6;
+            --primary-shadow: #2563eb;
+            --secondary: #64748b;
+            --secondary-shadow: #475569;
+            --key-bg: #ffffff;
+            --key-text: #333333;
+            --key-shadow: #cbd5e1;
+            --correct-color: #22c55e;
+            --incorrect-color: #ef4444;
+            --panel-bg: #f8fafc;
+            --typed-bg: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-container: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary: #4f46e5;
+            --primary-shadow: #3730a3;
+            --secondary: #475569;
+            --secondary-shadow: #334155;
+            --key-bg: #334155;
+            --key-text: #f8fafc;
+            --key-shadow: #020617;
+            --panel-bg: #0f172a;
+            --typed-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Hanuman', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background: var(--bg-container);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: sans-serif;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 { margin: 0; font-size: 24px; text-align: left; }
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        select, .btn {
+            padding: 10px 16px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            background: var(--bg-container);
+            color: var(--text-main);
+            transition: all 0.1s;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 0 var(--primary-shadow);
+            transform: translateY(0);
+        }
+        .btn:active { box-shadow: 0 0 0 var(--primary-shadow); transform: translateY(4px); }
+        .btn-secondary { background: var(--secondary); box-shadow: 0 4px 0 var(--secondary-shadow); }
+        .btn-secondary:active { box-shadow: 0 0 0 var(--secondary-shadow); transform: translateY(4px); }
+
+        .custom-text-section { display: none; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .custom-text-section.active { display: flex; }
+        textarea {
+            width: 100%; padding: 12px; border-radius: 8px; border: 2px solid var(--border-color);
+            background: var(--bg-container); color: var(--text-main); font-family: 'Hanuman', sans-serif;
+            font-size: 18px; resize: vertical; box-sizing: border-box;
+        }
+
+        .stats-bar {
+            display: flex; justify-content: center; gap: 30px; background: var(--panel-bg);
+            padding: 15px; border-radius: 12px; margin-bottom: 20px; font-family: sans-serif;
+            border: 1px solid var(--border-color); flex-wrap: wrap;
+        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; min-width: 80px; }
+        .stat-value { font-size: 24px; font-weight: bold; }
+        .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+
+        .typing-area { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; cursor: text; }
+        .text-display, .typed-display {
+            font-size: 28px; text-align: left; padding: 15px 20px;
+            border-radius: 10px; line-height: 1.6; word-wrap: break-word; min-height: 40px;
+        }
+        .text-display { background: var(--bg-container); border: 2px solid var(--border-color); color: var(--text-muted); min-height: 80px;}
+        .typed-display { background: var(--typed-bg); border: 2px dashed var(--primary); color: var(--text-main); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+
+        .text-display span { transition: all 0.1s; }
+        .text-display span.correct { color: var(--correct-color); font-weight: bold;}
+        .text-display span.incorrect { color: var(--incorrect-color); background: rgba(239, 68, 68, 0.2); border-radius: 4px;}
+        .text-display span.active { color: var(--primary); text-decoration: underline; text-decoration-thickness: 3px; }
+        
+        .input-field { opacity: 0; position: absolute; z-index: -999; }
+        
+        .keyboard-wrapper { display: flex; justify-content: center; align-items: flex-end; gap: 15px; width: 100%; }
+
+        .hand-svg { width: 110px; height: auto; flex-shrink: 0; padding-bottom: 10px; }
+        .palm, .finger { fill: var(--key-bg); stroke: var(--border-color); stroke-width: 3; transition: fill 0.2s, stroke 0.2s, transform 0.1s; }
+        .finger.active-finger { fill: var(--correct-color) !important; stroke: #15803d !important; }
+
+        .keyboard {
+            background: var(--panel-bg); padding: 15px; border-radius: 12px;
+            border: 1px solid var(--border-color); display: flex; flex-direction: column;
+            gap: 6px; align-items: center; overflow-x: auto;
+        }
+        .key-row { display: flex; gap: 5px; }
+        .key {
+            width: 44px; height: 50px; background: var(--key-bg); color: var(--key-text);
+            border: 1px solid var(--border-color); border-radius: 6px; display: flex;
+            flex-direction: column; align-items: center; justify-content: space-between;
+            padding: 4px 0; box-sizing: border-box; box-shadow: 0 4px 0 var(--key-shadow);
+            font-size: 14px; transition: transform 0.05s, box-shadow 0.05s, background 0.2s;
+            position: relative; /* Quan trọng để chữ tiếng Anh hiển thị đúng góc */
+        }
+        
+        /* Ký tự Tiếng Anh mờ */
+        .eng-char {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 10px;
+            color: rgba(239, 68, 68, 0.6); /* Màu đỏ mờ */
+            font-family: sans-serif;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .key .shift-char { font-size: 11px; color: var(--text-muted); padding-left: 10px;}
+        .key .base-char { font-weight: bold; align-self: center;}
+        
+        .key.highlight { background: var(--correct-color) !important; border-color: #16a34a !important; box-shadow: 0 4px 0 #15803d !important; color: white; }
+        .key.highlight .shift-char, .key.highlight .base-char, .key.highlight .eng-char { color: white; }
+        .key.pressed { transform: translateY(4px); box-shadow: 0 0 0 var(--key-shadow) !important; }
+        
+        .key.wide { width: 65px; justify-content: center; font-family: sans-serif; font-size: 12px;}
+        .key.wider { width: 85px; justify-content: center; font-family: sans-serif; font-size: 12px;}
+        .key.space { width: 280px; justify-content: center;}
+
+        .footer { margin-top: auto; padding: 15px; font-family: sans-serif; font-size: 16px; color: var(--text-muted); text-align: center; }
+        .footer a { color: var(--primary); text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .footer a:hover { color: var(--correct-color); text-decoration: underline; }
+
+        @media (max-width: 900px) { .hand-svg { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Luyện gõ Tiếng Khmer​ GK</h1>
+            <div class="controls">
+                <button class="btn btn-secondary" id="themeToggle">🌓 Giao diện</button>
+                <select id="levelSelect">
+                    <option value="1">Cấp độ 1: Chữ cái cơ bản (Dễ)</option>
+                    <option value="2">Cấp độ 2: Từ vựng & Giao tiếp (Vừa)</option>
+                    <option value="3">Cấp độ 3: Ca dao, Tục ngữ (Khó)</option>
+                </select>
+                <button class="btn btn-secondary" id="toggleCustomBtn">📝 Nhập văn bản</button>
+                <button class="btn" id="resetBtn">🔄 Thử câu khác</button>
+            </div>
+        </div>
+
+        <div class="custom-text-section" id="customTextSection">
+            <textarea id="customTextInput" rows="3" placeholder="Dán văn bản tiếng Khmer của bạn vào đây..."></textarea>
+            <button class="btn" id="startCustomBtn">Bắt đầu gõ</button>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item"><span class="stat-value" id="time">00:00</span><span class="stat-label">Thời gian</span></div>
+            <div class="stat-item"><span class="stat-value" id="wpm">0</span><span class="stat-label">WPM</span></div>
+            <div class="stat-item"><span class="stat-value" id="mistakes">0</span><span class="stat-label">Lỗi sai</span></div>
+            <div class="stat-item"><span class="stat-value" id="accuracy">100%</span><span class="stat-label">Chính xác</span></div>
+        </div>
+        
+        <div class="typing-area" onclick="document.getElementById('inputField').focus()">
+            <div class="text-display" id="textDisplay"></div>
+            <div class="typed-display" id="typedDisplay"></div>
+        </div>
+        
+        <input type="text" class="input-field" id="inputField" autocomplete="off">
+        
+        <div class="keyboard-wrapper">
+            <svg viewBox="0 0 120 150" class="hand-svg">
+                <rect x="15" y="70" width="76" height="60" rx="15" class="palm"/>
+                <rect id="L1" x="15" y="35" width="16" height="45" rx="8" class="finger"/>
+                <rect id="L2" x="35" y="15" width="16" height="65" rx="8" class="finger"/>
+                <rect id="L3" x="55" y="5" width="16" height="75" rx="8" class="finger"/>
+                <rect id="L4" x="75" y="20" width="16" height="60" rx="8" class="finger"/>
+                <rect id="L5" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/>
+            </svg>
+
+            <div class="keyboard" id="keyboard">
+                <div class="key-row">
+                    <div class="key" id="KeyBacktick"><span class="eng-char">`</span><span class="shift-char">~</span><span class="base-char">`</span></div>
+                    <div class="key" id="Digit1"><span class="eng-char">1</span><span class="shift-char">!</span><span class="base-char">1</span></div>
+                    <div class="key" id="Digit2"><span class="eng-char">2</span><span class="shift-char">@</span><span class="base-char">2</span></div>
+                    <div class="key" id="Digit3"><span class="eng-char">3</span><span class="shift-char">#</span><span class="base-char">3</span></div>
+                    <div class="key" id="Digit4"><span class="eng-char">4</span><span class="shift-char">$</span><span class="base-char">4</span></div>
+                    <div class="key" id="Digit5"><span class="eng-char">5</span><span class="shift-char">%</span><span class="base-char">5</span></div>
+                    <div class="key" id="Digit6"><span class="eng-char">6</span><span class="shift-char">^</span><span class="base-char">6</span></div>
+                    <div class="key" id="Digit7"><span class="eng-char">7</span><span class="shift-char">&</span><span class="base-char">7</span></div>
+                    <div class="key" id="Digit8"><span class="eng-char">8</span><span class="shift-char">*</span><span class="base-char">8</span></div>
+                    <div class="key" id="Digit9"><span class="eng-char">9</span><span class="shift-char">(</span><span class="base-char">9</span></div>
+                    <div class="key" id="Digit0"><span class="eng-char">0</span><span class="shift-char">)</span><span class="base-char">0</span></div>
+                    <div class="key" id="Minus"><span class="eng-char">-</span><span class="shift-char">_</span><span class="base-char">-</span></div>
+                    <div class="key" id="Equal"><span class="eng-char">=</span><span class="shift-char">+</span><span class="base-char">=</span></div>
+                    <div class="key wide" id="Backspace">Back</div>
+                </div>
+                <div class="key-row">
+                    <div class="key wide">Tab</div>
+                    <div class="key" id="KeyQ"><span class="eng-char">Q</span><span class="shift-char">ឈ</span><span class="base-char">ឆ</span></div>
+                    <div class="key" id="KeyW"><span class="eng-char">W</span><span class="shift-char">ឺ</span><span class="base-char">ឹ</span></div>
+                    <div class="key" id="KeyE"><span class="eng-char">E</span><span class="shift-char">ែ</span><span class="base-char">េ</span></div>
+                    <div class="key" id="KeyR"><span class="eng-char">R</span><span class="shift-char">ឬ</span><span class="base-char">រ</span></div>
+                    <div class="key" id="KeyT"><span class="eng-char">T</span><span class="shift-char">ទ</span><span class="base-char">ត</span></div>
+                    <div class="key" id="KeyY"><span class="eng-char">Y</span><span class="shift-char">ួ</span><span class="base-char">យ</span></div>
+                    <div class="key" id="KeyU"><span class="eng-char">U</span><span class="shift-char">ូ</span><span class="base-char">ុ</span></div>
+                    <div class="key" id="KeyI"><span class="eng-char">I</span><span class="shift-char">ី</span><span class="base-char">ិ</span></div>
+                    <div class="key" id="KeyO"><span class="eng-char">O</span><span class="shift-char">ៅ</span><span class="base-char">ោ</span></div>
+                    <div class="key" id="KeyP"><span class="eng-char">P</span><span class="shift-char">ភ</span><span class="base-char">ផ</span></div>
+                    <div class="key" id="BracketLeft"><span class="eng-char">[</span><span class="shift-char">ឿ</span><span class="base-char">ៀ</span></div>
+                    <div class="key" id="BracketRight"><span class="eng-char">]</span><span class="shift-char">ឳ</span><span class="base-char">ឪ</span></div>
+                    <div class="key" id="Backslash"><span class="eng-char">\</span><span class="shift-char">|</span><span class="base-char">\</span></div>
+                </div>
+                <div class="key-row">
+                    <div class="key wider">Caps</div>
+                    <div class="key" id="KeyA"><span class="eng-char">A</span><span class="shift-char">ាំ</span><span class="base-char">ា</span></div>
+                    <div class="key" id="KeyS"><span class="eng-char">S</span><span class="shift-char">ៃ</span><span class="base-char">ស</span></div>
+                    <div class="key" id="KeyD"><span class="eng-char">D</span><span class="shift-char">ឌ</span><span class="base-char">ដ</span></div>
+                    <div class="key" id="KeyF"><span class="eng-char">F</span><span class="shift-char">ធ</span><span class="base-char">ថ</span></div>
+                    <div class="key" id="KeyG"><span class="eng-char">G</span><span class="shift-char">អ</span><span class="base-char">ង</span></div>
+                    <div class="key" id="KeyH"><span class="eng-char">H</span><span class="shift-char">ះ</span><span class="base-char">ហ</span></div>
+                    <div class="key" id="KeyJ"><span class="eng-char">J</span><span class="shift-char">ញ</span><span class="base-char">្</span></div>
+                    <div class="key" id="KeyK"><span class="eng-char">K</span><span class="shift-char">គ</span><span class="base-char">ក</span></div>
+                    <div class="key" id="KeyL"><span class="eng-char">L</span><span class="shift-char">ឡ</span><span class="base-char">ល</span></div>
+                    <div class="key" id="Semicolon"><span class="eng-char">;</span><span class="shift-char">៖</span><span class="base-char">ើ</span></div>
+                    <div class="key" id="Quote"><span class="eng-char">'</span><span class="shift-char">៉</span><span class="base-char">់</span></div>
+                    <div class="key wider" id="Enter">Enter</div>
+                </div>
+                <div class="key-row">
+                    <div class="key wider" id="KeyShiftLeft">Shift</div>
+                    <div class="key" id="KeyZ"><span class="eng-char">Z</span><span class="shift-char">ឍ</span><span class="base-char">ឋ</span></div>
+                    <div class="key" id="KeyX"><span class="eng-char">X</span><span class="shift-char">ឃ</span><span class="base-char">ខ</span></div>
+                    <div class="key" id="KeyC"><span class="eng-char">C</span><span class="shift-char">ជ</span><span class="base-char">ច</span></div>
+                    <div class="key" id="KeyV"><span class="eng-char">V</span><span class="shift-char">៌</span><span class="base-char">វ</span></div>
+                    <div class="key" id="KeyB"><span class="eng-char">B</span><span class="shift-char">ព</span><span class="base-char">ប</span></div>
+                    <div class="key" id="KeyN"><span class="eng-char">N</span><span class="shift-char">ណ</span><span class="base-char">ន</span></div>
+                    <div class="key" id="KeyM"><span class="eng-char">M</span><span class="shift-char">ំ</span><span class="base-char">ម</span></div>
+                    <div class="key" id="Comma"><span class="eng-char">,</span><span class="shift-char">ៗ</span><span class="base-char">,</span></div>
+                    <div class="key" id="Period"><span class="eng-char">.</span><span class="shift-char">៕</span><span class="base-char">។</span></div>
+                    <div class="key" id="Slash"><span class="eng-char">/</span><span class="shift-char">?</span><span class="base-char">/</span></div>
+                    <div class="key wider" id="KeyShiftRight">Shift</div>
+                </div>
+                <div class="key-row">
+                    <div class="key space" id="Space">Space</div>
+                </div>
+            </div>
+
+            <svg viewBox="0 0 120 150" class="hand-svg" style="transform: scaleX(-1);">
+                <rect x="15" y="70" width="76" height="60" rx="15" class="palm"/>
+                <rect id="R5" x="15" y="35" width="16" height="45" rx="8" class="finger"/>
+                <rect id="R4" x="35" y="15" width="16" height="65" rx="8" class="finger"/>
+                <rect id="R3" x="55" y="5" width="16" height="75" rx="8" class="finger"/>
+                <rect id="R2" x="75" y="20" width="16" height="60" rx="8" class="finger"/>
+                <rect id="R1" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="footer">
+        Tác giả <a href="https://www.facebook.com/giaukienart230823" target="_blank">Giàu Kiên</a>
+    </div>
+
+    <script>
+        const levelsData = {
+            "1": [
+                "ក ខ គ ឃ ង", "ច ឆ ជ ឈ ញ", "ដ ឋ ឌ ឍ ណ", "ត ថ ទ ធ ន", "ប ផ ព ភ ម",
+                "យ រ ល វ ស ហ ឡ អ", "ស្រៈនិស្ស័យ", "ា ិ ី ឹ ឺ ុ ូ ួ ើ ឿ ៀ េ ែ ៃ ោ ៅ", 
+                "ុំ ំ ាំ ះ ុះ េះ ោះ", "កា កិ កី កឹ កឺ", "កុ កូ កួ កើ កឿ", "កៀ កេ កែ កៃ កោ", 
+                "កៅ កុំ កំ កាំ កះ", "ស ខ ល", "សុខ", "ទុក្ខ", "ធំ", "តូច", "វែង", "ខ្លី"
+            ],
+            "2": [
+                "សួស្តី", "អរគុណ", "សុំទោស", "លាហើយ", "បាទ", "ចាស", "មិនអីទេ",
+                "តើអ្នកឈ្មោះអ្វី?", "ខ្ញុំឈ្មោះកក្កដា", "រីករាយដែលបានស្គាល់អ្នក",
+                "តើអ្នកសុខសប្បាយជាទេ?", "ខ្ញុំសុខសប្បាយ", "ចុះអ្នកវិញ?",
+                "ប្រទេសកម្ពុជាមានប្រាសាទអង្គរវត្ត", "ប្រជាជនខ្មែររួសរាយរាក់ទាក់"
+            ],
+            "3": [
+                "ចេះមកពីរៀន មានមកពីរក។", "ធ្វើល្អបានល្អ ធ្វើអាក្រក់បានអាក្រក់។",
+                "ទឹកស្រក់តក់ៗទម្លុះថ្មបាន។", "កុំឃើញដំរីជុះ ចង់ជុះតាមដំរី។",
+                "សំណាបយោងដី ស្រីយោងប្រុស។", "ត្រីមួយកន្ត្រក ស្អុយមួយ ស្អុយទាំងអស់។",
+                "សេចក្តីស្រឡាញ់របស់ឪពុកម្តាយគ្មានព្រំដែនឡើយ។", "ពេលវេលាមានតម្លៃជាងមាសប្រាក់ទៅទៀត។",
+                "ការអប់រំមានសារៈសំខាន់ណាស់សម្រាប់ការអភិវឌ្ឍប្រទេស។"
+            ]
+        };
+
+        // Đã sửa lại lỗi Map phím cho chuẩn xác: Kh, K, C...
+        const charToKeyId = {
+            'ឆ': 'KeyQ', 'ឈ': 'KeyQ', 'ឹ': 'KeyW', 'ឺ': 'KeyW', 'េ': 'KeyE', 'ែ': 'KeyE',
+            'រ': 'KeyR', 'ឬ': 'KeyR', 'ត': 'KeyT', 'ទ': 'KeyT', 'យ': 'KeyY', 'ួ': 'KeyY',
+            'ុ': 'KeyU', 'ូ': 'KeyU', 'ិ': 'KeyI', 'ី': 'KeyI', 'ោ': 'KeyO', 'ៅ': 'KeyO',
+            'ផ': 'KeyP', 'ភ': 'KeyP', 'ៀ': 'BracketLeft', 'ឿ': 'BracketLeft', 'ឪ': 'BracketRight', 'ឳ': 'BracketRight',
+            'ា': 'KeyA', 'ាំ': 'KeyA', 'ស': 'KeyS', 'ៃ': 'KeyS', 'ដ': 'KeyD', 'ឌ': 'KeyD',
+            'ថ': 'KeyF', 'ធ': 'KeyF', 'ង': 'KeyG', 'អ': 'KeyG', 'ហ': 'KeyH', 'ះ': 'KeyH',
+            '្': 'KeyJ', '\u17D2': 'KeyJ', 'ញ': 'KeyJ', 
+            'ក': 'KeyK', 'គ': 'KeyK', /* Sửa lại K chứa ก và គ */
+            'ល': 'KeyL', 'ឡ': 'KeyL',
+            'ើ': 'Semicolon', '៖': 'Semicolon', '់': 'Quote', '៉': 'Quote',
+            'ឋ': 'KeyZ', 'ឍ': 'KeyZ', 
+            'ខ': 'KeyX', 'ឃ': 'KeyX', /* Sửa lại X chứa ខ và ឃ */
+            'ច': 'KeyC', 'ជ': 'KeyC',
+            'វ': 'KeyV', '៌': 'KeyV', 'ប': 'KeyB', 'ព': 'KeyB', 'ន': 'KeyN', 'ណ': 'KeyN',
+            'ម': 'KeyM', 'ំ': 'KeyM', 
+            ',': 'Comma', 'ៗ': 'Comma', /* Sửa dấu phẩy Shift thành ៗ */
+            '។': 'Period', '៕': 'Period', '?': 'Slash', '/': 'Slash',
+            ' ': 'Space', '1': 'Digit1', '2': 'Digit2', '3': 'Digit3', '4': 'Digit4', '5': 'Digit5',
+            '6': 'Digit6', '7': 'Digit7', '8': 'Digit8', '9': 'Digit9', '0': 'Digit0',
+            '~': 'KeyBacktick', '!': 'Digit1', '@': 'Digit2', '#': 'Digit3', '$': 'Digit4', 
+            '%': 'Digit5', '^': 'Digit6', '&': 'Digit7', '*': 'Digit8', '(': 'Digit9', ')': 'Digit0',
+            '_': 'Minus', '+': 'Equal'
+        };
+
+        const fingerMap = {
+            'KeyBacktick': 'L1', 'Digit1': 'L1', 'KeyQ': 'L1', 'KeyA': 'L1', 'KeyZ': 'L1',
+            'Digit2': 'L2', 'KeyW': 'L2', 'KeyS': 'L2', 'KeyX': 'L2',
+            'Digit3': 'L3', 'KeyE': 'L3', 'KeyD': 'L3', 'KeyC': 'L3',
+            'Digit4': 'L4', 'Digit5': 'L4', 'KeyR': 'L4', 'KeyT': 'L4', 'KeyF': 'L4', 'KeyG': 'L4', 'KeyV': 'L4', 'KeyB': 'L4',
+            'Space': 'thumb', 
+            'Digit6': 'R2', 'Digit7': 'R2', 'KeyY': 'R2', 'KeyU': 'R2', 'KeyH': 'R2', 'KeyJ': 'R2', 'KeyN': 'R2', 'KeyM': 'R2',
+            'Digit8': 'R3', 'KeyI': 'R3', 'KeyK': 'R3', 'Comma': 'R3',
+            'Digit9': 'R4', 'KeyO': 'R4', 'KeyL': 'R4', 'Period': 'R4',
+            'Digit0': 'R5', 'Minus': 'R5', 'Equal': 'R5', 'KeyP': 'R5', 'BracketLeft': 'R5', 'BracketRight': 'R5', 'Backslash': 'R5', 'Semicolon': 'R5', 'Quote': 'R5', 'Slash': 'R5'
+        };
+
+        // Đã xóa 'ខ' khỏi danh sách Shift, thêm 'គ', 'ឃ', 'ៗ' và các ký tự đặc biệt khác
+        const requiresShift = ['ឈ','ឺ','ែ','ឬ','ទ','ួ','ូ','ី','ៅ','ភ','ឿ','ឳ','ាំ','ៃ','ឌ','ធ','អ','ះ','ញ','គ','ឡ','៖','៉','ឍ','ឃ','ជ','៌','ព','ណ','ំ','?','៕','ៗ','~','!','@','#','$','%','^','&','*','(',')','_','+','|', ' '];
+
+        const textDisplay = document.getElementById("textDisplay");
+        const typedDisplay = document.getElementById("typedDisplay");
+        const inputField = document.getElementById("inputField");
+        const timeTag = document.getElementById("time");
+        const mistakesTag = document.getElementById("mistakes");
+        const wpmTag = document.getElementById("wpm");
+        const accuracyTag = document.getElementById("accuracy");
+        const themeToggle = document.getElementById("themeToggle");
+        
+        let timer, timeElapsed = 0, mistakes = 0, isTyping = false;
+        let currentText = "", previousValue = "", isCustomMode = false;
+
+        themeToggle.addEventListener("click", () => {
+            const body = document.body;
+            body.getAttribute("data-theme") === "dark" ? body.removeAttribute("data-theme") : body.setAttribute("data-theme", "dark");
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (document.activeElement !== document.getElementById("customTextInput")) inputField.focus();
+            let keyId = e.code;
+            if (keyId === 'Space' || keyId === 'Backspace' || keyId === 'Enter') keyId = keyId;
+            const keyEl = document.getElementById(keyId);
+            if (keyEl) keyEl.classList.add('pressed');
+        });
+
+        document.addEventListener('keyup', (e) => {
+            let keyId = e.code;
+            const keyEl = document.getElementById(keyId);
+            if (keyEl) keyEl.classList.remove('pressed');
+        });
+
+        function loadText() {
+            if (!isCustomMode) {
+                const levelTexts = levelsData[document.getElementById("levelSelect").value];
+                currentText = levelTexts[Math.floor(Math.random() * levelTexts.length)].replace(/\u200B/g, ''); 
+            }
+            
+            textDisplay.innerHTML = "";
+            currentText.split("").forEach(char => textDisplay.innerHTML += `<span>${char}</span>`);
+            if (textDisplay.querySelectorAll("span").length > 0) textDisplay.querySelectorAll("span")[0].classList.add("active");
+            
+            updateKeyboardHighlight();
+            typedDisplay.innerHTML = "&nbsp;"; 
+        }
+
+        function updateKeyboardHighlight() {
+            document.querySelectorAll('.key.highlight').forEach(el => el.classList.remove('highlight'));
+            document.querySelectorAll('.finger.active-finger').forEach(el => el.classList.remove('active-finger'));
+            
+            let charIndex = inputField.value.length;
+            if (charIndex < currentText.length) {
+                let nextChar = currentText[charIndex];
+                let keyId = charToKeyId[nextChar];
+                
+                if (keyId) {
+                    let keyEl = document.getElementById(keyId);
+                    if (keyEl) keyEl.classList.add('highlight');
+
+                    let targetFinger = fingerMap[keyId];
+                    if (targetFinger === 'thumb') {
+                        document.getElementById('L5').classList.add('active-finger');
+                        document.getElementById('R1').classList.add('active-finger');
+                    } else if (targetFinger) {
+                        document.getElementById(targetFinger).classList.add('active-finger');
+                    }
+
+                    if (requiresShift.includes(nextChar)) {
+                        if (targetFinger === 'thumb') {
+                            document.getElementById('KeyShiftLeft').classList.add('highlight');
+                            document.getElementById('L1').classList.add('active-finger');
+                            document.getElementById('L5').classList.remove('active-finger'); 
+                        } else if (targetFinger && targetFinger.startsWith('L')) {
+                            document.getElementById('KeyShiftRight').classList.add('highlight');
+                            document.getElementById('R5').classList.add('active-finger');
+                        } else {
+                            document.getElementById('KeyShiftLeft').classList.add('highlight');
+                            document.getElementById('L1').classList.add('active-finger');
+                        }
+                    }
+                }
+            }
+        }
+
+        function initTyping() {
+            let typedText = inputField.value;
+            if (!isTyping && typedText.length > 0) {
+                timer = setInterval(updateTimer, 1000);
+                isTyping = true;
+            }
+
+            let firstError = -1;
+            for (let i = 0; i < typedText.length; i++) {
+                if (typedText[i] !== currentText[i]) { firstError = i; break; }
+            }
+
+            if (firstError !== -1 && typedText.length > firstError + 1) {
+                inputField.value = previousValue; typedText = previousValue;
+            } else if (typedText.length > previousValue.length && firstError === typedText.length - 1) {
+                mistakes++;
+            }
+
+            previousValue = typedText;
+            typedDisplay.innerText = typedText;
+            if (typedText.length === 0) typedDisplay.innerHTML = "&nbsp;";
+
+            let characters = textDisplay.querySelectorAll("span");
+            characters.forEach((span, index) => {
+                span.classList.remove("active", "correct", "incorrect");
+                if (index < typedText.length) {
+                    span.classList.add(span.innerText === typedText[index] ? "correct" : "incorrect");
+                }
+            });
+
+            let charIndex = typedText.length;
+            if (charIndex < characters.length) characters[charIndex].classList.add("active");
+
+            updateKeyboardHighlight();
+            calculateStats(charIndex);
+
+            if (typedText === currentText) { clearInterval(timer); inputField.blur(); }
+        }
+
+        function updateTimer() {
+            timeElapsed++;
+            let m = Math.floor(timeElapsed / 60), s = timeElapsed % 60;
+            timeTag.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+            calculateStats(inputField.value.length);
+        }
+
+        function calculateStats(charIndex) {
+            if (timeElapsed > 0) {
+                let wpm = Math.round((((charIndex - mistakes) / 5) / timeElapsed) * 60);
+                wpmTag.innerText = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+            }
+            let accuracy = charIndex > 0 ? Math.round(((charIndex - mistakes) / charIndex) * 100) : 100;
+            mistakesTag.innerText = mistakes;
+            accuracyTag.innerText = `${accuracy < 0 ? 0 : accuracy}%`;
+        }
+
+        function resetGame(forceRandom = false) {
+            if (forceRandom) { isCustomMode = false; document.getElementById("customTextInput").value = ""; }
+            clearInterval(timer); timeElapsed = 0; mistakes = 0; isTyping = false;
+            previousValue = ""; inputField.value = ""; timeTag.innerText = "00:00";
+            wpmTag.innerText = 0; mistakesTag.innerText = 0; accuracyTag.innerText = "100%";
+            loadText(); inputField.focus();
+        }
+
+        document.getElementById("levelSelect").addEventListener("change", () => resetGame(true));
+        document.getElementById("resetBtn").addEventListener("click", () => resetGame(isCustomMode ? false : true));
+        inputField.addEventListener("input", initTyping);
+        
+        document.getElementById("toggleCustomBtn").addEventListener("click", () => {
+            document.getElementById("customTextSection").classList.toggle("active");
+        });
+
+        document.getElementById("startCustomBtn").addEventListener("click", () => {
+            let userText = document.getElementById("customTextInput").value.trim();
+            if (userText) {
+                currentText = userText.replace(/\n/g, ' ').replace(/\u200B/g, '');
+                isCustomMode = true; resetGame();
+            } else alert("Vui lòng nhập văn bản tiếng Khmer trước!");
+        });
+
+        resetGame(true);
+    </script>
+</body>
+</html>
