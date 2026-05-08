@@ -13,9 +13,9 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0; 
-            --primary: #1e3a8a; /* Xanh hoàng gia */
+            --primary: #1e3a8a; 
             --primary-shadow: #1e3a8a;
-            --gold-accent: #d4af37; /* Vàng hoàng gia Campuchia */
+            --gold-accent: #d4af37; 
             --gold-shadow: #b8962e;
             --secondary: #64748b;
             --secondary-shadow: #475569;
@@ -24,7 +24,7 @@
             --key-shadow: #cbd5e1;
             --correct-color: #10b981; 
             --incorrect-color: #ef4444;
-            --panel-bg: rgba(248, 250, 252, 0.85); /* Trong suốt nhẹ để thấy nền */
+            --panel-bg: rgba(248, 250, 252, 0.85); 
             --typed-bg: rgba(241, 245, 249, 0.85);
         }
 
@@ -62,9 +62,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* ================= CHÈN ẢNH VÀO CONTAINER MÀ KHÔNG LÀM MỜ CHỮ ================= */
         .container {
-            /* Phủ lớp trắng (chế độ sáng) lên ảnh Angkor Wat 85% để dễ đọc chữ */
             background-image: linear-gradient(
                 rgba(255, 255, 255, 0.5), 
                 rgba(255, 255, 255, 0.5)
@@ -74,7 +72,7 @@
             background-repeat: no-repeat;
             padding: 35px;
             border-radius: 24px; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(212, 175, 55, 0.3); /* Viền vàng mờ */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(212, 175, 55, 0.3); 
             width: 100%;
             max-width: 1024px;
             text-align: center;
@@ -84,7 +82,6 @@
             overflow: hidden;
         }
 
-        /* Lớp phủ chế độ tối cho Container */
         [data-theme="dark"] .container {
             background-image: linear-gradient(
                 rgba(30, 41, 59, 0.88), 
@@ -92,291 +89,138 @@
             ), url('https://i.postimg.cc/8CD28b59/hinh-bong-angkor-wat-tren-nen-troi-xanh-1639-63375.avif');
         }
 
-        /* Vệt sáng trang trí ở góc container */
         .container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
             background: linear-gradient(90deg, var(--primary), var(--gold-accent), var(--primary));
         }
 
-        /* ================= TIÊU ĐỀ & TRANG TRÍ (KBACH) ================= */
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 25px;
-            gap: 15px;
-        }
+        .header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; gap: 15px; }
 
-        #levelSelect, #toggleCustomBtn, #resetBtn, #ui-author {
-            font-family: chenla, sans-serif;
-        }
-        .header h1 { 
-            margin: 0; 
-            text-align: center; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-        }
+        #levelSelect, #toggleCustomBtn, #resetBtn, #ui-author, #miniGameBtn { font-family: chenla, sans-serif; }
+        .header h1 { margin: 0; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; transition: all 0.3s ease; }
 
-        /* Font Tiếng Việt */
-        .vi-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--primary);
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
+        .vi-title { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        .km-title { font-family: 'Moul', serif; font-size: 36px; font-weight: normal; color: var(--gold-accent); text-shadow: 2px 2px 4px rgba(0,0,0,0.2); line-height: 1.4; }
+        .title-icon { font-size: 28px; color: var(--gold-accent); filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2)); }
 
-        /* Font Tiếng Khmer */
-        .km-title {
-            font-family: 'Moul', serif; 
-            font-size: 36px;
-            font-weight: normal;
-            color: var(--gold-accent);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            line-height: 1.4;
-        }
-
-        .title-icon {
-            font-size: 28px;
-            color: var(--gold-accent);
-            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
-        }
-
-        /* Dải phân cách họa tiết */
-        .kbach-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 15px auto;
-        }
-        .kbach-divider::before, .kbach-divider::after {
-            content: '';
-            height: 2px;
-            flex: 1;
-            background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
-        }
-        .kbach-divider span {
-            color: var(--gold-accent);
-            font-size: 20px;
-            padding: 0 15px;
-        }
+        .kbach-divider { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 400px; margin: 0 auto 15px auto; }
+        .kbach-divider::before, .kbach-divider::after { content: ''; height: 2px; flex: 1; background: linear-gradient(to right, transparent, var(--gold-accent), transparent); }
+        .kbach-divider span { color: var(--gold-accent); font-size: 20px; padding: 0 15px; }
 
         .controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; }
 
-        select, .btn {
-            padding: 12px 20px;
-            font-size: 14px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            outline: none;
-            cursor: pointer;
-            font-family: sans-serif;
-            font-weight: bold;
-            background: var(--key-bg);
-            color: var(--text-main);
-            transition: all 0.1s;
-        }
-
-        .btn {
-            background: var(--gold-accent);
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            border: none;
-            box-shadow: 0 5px 0 var(--gold-shadow); 
-            transform: translateY(0);
-        }
+        select, .btn { padding: 12px 20px; font-size: 14px; border-radius: 12px; border: 1px solid var(--border-color); outline: none; cursor: pointer; font-family: sans-serif; font-weight: bold; background: var(--key-bg); color: var(--text-main); transition: all 0.1s; }
+        .btn { background: var(--gold-accent); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); border: none; box-shadow: 0 5px 0 var(--gold-shadow); transform: translateY(0); }
         .btn:active { box-shadow: 0 1px 0 var(--gold-shadow); transform: translateY(4px); }
         .btn-secondary { background: var(--primary); box-shadow: 0 5px 0 var(--primary-shadow); color: white;}
         .btn-secondary:active { box-shadow: 0 1px 0 var(--primary-shadow); transform: translateY(4px); }
 
+        #miniGameBtn { background: #10b981; box-shadow: 0 5px 0 #059669; }
+        #miniGameBtn:active { box-shadow: 0 1px 0 #059669; }
+
         .custom-text-section { display: none; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .custom-text-section.active { display: flex; }
-        textarea {
-            width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--gold-accent);
-            background: var(--panel-bg); color: var(--text-main); font-family: 'Hanuman', sans-serif;
-            font-size: 18px; resize: vertical; box-sizing: border-box;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
-        }
+        textarea { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--gold-accent); background: var(--panel-bg); color: var(--text-main); font-family: 'Hanuman', sans-serif; font-size: 18px; resize: vertical; box-sizing: border-box; backdrop-filter: blur(5px); transition: all 0.3s; }
         textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(37, 99, 235, 0.2); outline: none;}
 
-        .stats-bar {
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            background: var(--panel-bg);
-            backdrop-filter: blur(5px);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            font-family: sans-serif;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-        
+        /* ================= CHẾ ĐỘ THƯỜNG ================= */
+        #normalModeUI { display: flex; flex-direction: column; width: 100%; }
+
+        .stats-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; background: var(--panel-bg); backdrop-filter: blur(5px); padding: 20px; border-radius: 16px; margin-bottom: 15px; font-family: sans-serif; border: 1px solid var(--border-color); position: relative; }
         .stat-item { display: flex; flex-direction: column; align-items: center; }
         .stat-value { font-size: 28px; font-weight: 800; color: var(--primary); }
         [data-theme="dark"] .stat-value { color: var(--gold-accent); }
         .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; font-weight: bold;}
 
-        .typing-area { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; cursor: text; }
-        .text-display, .typed-display {
-            font-size: 30px; text-align: left; padding: 25px;
-            border-radius: 16px; line-height: 1.8; word-wrap: break-word; min-height: 60px;
-            transition: all 0.2s;
-            backdrop-filter: blur(5px);
-            
-        }
-        .text-display { background: var(--key-bg); border: 2px solid var(--border-color); color: var(--text-muted); min-height: 90px;}
-        .typed-display { background: var(--typed-bg); border: 2px dashed var(--gold-accent); color: var(--text-main); box-shadow: inset 0 3px 6px rgba(0,0,0,0.05);
-            padding: 10px 25px !important; /* Giảm độ dày lề trên/dưới xuống còn 10px */
-    min-height: 25px !important;   /* Giảm chiều cao tối thiểu xuống 40px */
-    font-size: 20px !important;    /* Chữ nhỏ lại một chút để không bị cấn viền */ 
-        }
+        .new-record { animation: gold-pulse 1s infinite alternate; color: var(--gold-accent) !important; }
+        @keyframes gold-pulse { from { text-shadow: 0 0 5px var(--gold-accent); } to { text-shadow: 0 0 20px var(--gold-accent); } }
+        .confetti { position: fixed; top: -10px; width: 10px; height: 10px; pointer-events: none; z-index: 9999; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
 
+        .progress-container { width: 100%; height: 8px; background: var(--border-color); border-radius: 10px; overflow: hidden; margin-bottom: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--correct-color)); transition: width 0.2s ease-out; }
+
+        .font-controls { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 5px; width: 100%; }
+        .font-btn { background: var(--panel-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; backdrop-filter: blur(4px); }
+        .font-btn:hover { background: var(--gold-accent); color: white; border-color: var(--gold-accent); }
+
+        .typing-area { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; cursor: text; }
+        .text-display, .typed-display { text-align: left; padding: 25px; border-radius: 16px; line-height: 1.8; word-wrap: break-word; transition: all 0.2s; backdrop-filter: blur(5px); }
+        .text-display { font-size: 30px; background: var(--key-bg); border: 2px solid var(--border-color); color: var(--text-muted); min-height: 90px;}
+        .typed-display { background: var(--typed-bg); border: 2px dashed var(--gold-accent); color: var(--text-main); box-shadow: inset 0 3px 6px rgba(0,0,0,0.05); padding: 10px 25px !important; min-height: 25px !important; font-size: 20px !important; }
         .typed-display.error { border-color: var(--incorrect-color); background: rgba(239, 68, 68, 0.05); }
 
         .text-display span { transition: all 0.1s; }
         .text-display span.correct { color: var(--correct-color); font-weight: bold; text-shadow: 0 0 2px rgba(16, 185, 129, 0.3);}
         .text-display span.incorrect { color: var(--incorrect-color); background: rgba(239, 68, 68, 0.15); border-radius: 4px; border-bottom: 2px solid var(--incorrect-color);}
-        
         .text-display span.partial { color: var(--primary); }
         [data-theme="dark"] .text-display span.partial { color: var(--gold-accent); }
-        
         .text-display span.active { text-decoration: underline; text-decoration-thickness: 3px; font-weight: bold; text-underline-offset: 5px;}
-        
         .input-field { opacity: 0; position: absolute; z-index: -999; }
-        
-        .keyboard-wrapper { display: flex; justify-content: center; align-items: flex-end; gap: 15px; width: 100%; margin-top: 10px; }
 
+        /* ================= CHẾ ĐỘ MINI GAME MỚI ================= */
+        #miniGameUI { display: none; flex-direction: column; gap: 15px; width: 100%; margin-bottom: 25px; }
+        .mg-header { display: flex; justify-content: space-between; align-items: center; background: var(--panel-bg); padding: 15px 25px; border-radius: 16px; border: 2px solid var(--gold-accent); font-size: 20px; font-weight: bold; backdrop-filter: blur(5px); font-family: 'Montserrat', sans-serif;}
+        .mg-score { color: var(--primary); font-size: 24px;}
+        [data-theme="dark"] .mg-score { color: var(--gold-accent); }
+        .mg-lives { color: #ef4444; font-size: 24px; letter-spacing: 5px;}
+        
+        #mgBoard { width: 100%; height: 350px; background: rgba(255,255,255,0.7); border: 2px solid var(--border-color); border-radius: 16px; position: relative; overflow: hidden; backdrop-filter: blur(5px); box-shadow: inset 0 0 20px rgba(0,0,0,0.05);}
+        [data-theme="dark"] #mgBoard { background: rgba(15, 23, 42, 0.7); }
+        
+        .falling-word { position: absolute; top: -50px; padding: 10px 20px; background: var(--primary); color: #fff; font-size: 26px; border-radius: 12px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); white-space: nowrap; animation: fall linear forwards; z-index: 10; font-family: 'Hanuman', sans-serif;}
+        [data-theme="dark"] .falling-word { background: var(--gold-accent); color: var(--text-main); }
+        @keyframes fall { to { top: 400px; } }
+        
+        #mgStartScreen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(0,0,0,0.6); color: white; z-index: 20; backdrop-filter: blur(4px);}
+        #mgStartScreen h2 { color: var(--gold-accent); font-size: 36px; margin-bottom: 10px; font-family: 'Moul', serif; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
+        #mgStartScreen p { font-size: 18px; margin-bottom: 20px; font-family: sans-serif;}
+        
+        /* Giao diện bộ chọn độ khó */
+        .mg-select { padding: 10px 20px; font-size: 16px; border-radius: 12px; border: 2px solid var(--gold-accent); background: rgba(255,255,255,0.9); color: var(--text-main); font-family: 'Hanuman', sans-serif; font-weight: bold; cursor: pointer; margin-bottom: 15px; outline: none; }
+        [data-theme="dark"] .mg-select { background: rgba(15, 23, 42, 0.9); color: white;}
+
+        .mg-input { width: 100%; padding: 18px 25px; border-radius: 16px; border: 3px dashed var(--gold-accent); background: var(--typed-bg); color: var(--text-main); font-size: 28px; text-align: center; outline: none; font-family: 'Hanuman', sans-serif; transition: all 0.3s; font-weight: bold;}
+        .mg-input:focus { border-style: solid; border-color: var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+        [data-theme="dark"] .mg-input:focus { border-color: var(--gold-accent); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);}
+
+        /* ================= BÀN PHÍM VÀ BÀN TAY ================= */
+        .keyboard-wrapper { display: flex; justify-content: center; align-items: flex-end; gap: 15px; width: 100%; margin-top: 10px; }
         .hand-svg { width: 110px; height: auto; flex-shrink: 0; padding-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));}
         .palm, .finger { fill: var(--key-bg); stroke: var(--border-color); stroke-width: 3; transition: fill 0.2s, stroke 0.2s, transform 0.1s; }
         .finger.active-finger { fill: var(--correct-color) !important; stroke: #15803d !important; }
 
-        .keyboard {
-            background: var(--panel-bg); padding: 20px; border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--border-color); display: flex; flex-direction: column;
-            gap: 7px; align-items: center; overflow-x: auto;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
+        .keyboard { background: var(--panel-bg); padding: 20px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 7px; align-items: center; overflow-x: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; }
         .key-row { display: flex; gap: 6px; }
-        .key {
-            width: 46px; height: 52px; background: var(--key-bg); color: var(--key-text);
-            border: 1px solid var(--border-color); border-radius: 10px; display: flex;
-            flex-direction: column; align-items: center; justify-content: space-between;
-            padding: 5px 0; box-sizing: border-box; box-shadow: 0 5px 0 var(--key-shadow);
-            font-size: 14px; transition: transform 0.05s, box-shadow 0.05s, background 0.2s;
-            position: relative;
-        }
+        .key { width: 46px; height: 52px; background: var(--key-bg); color: var(--key-text); border: 1px solid var(--border-color); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 5px 0; box-sizing: border-box; box-shadow: 0 5px 0 var(--key-shadow); font-size: 14px; transition: transform 0.05s, box-shadow 0.05s, background 0.2s; position: relative; }
         
-        .eng-char {
-            position: absolute; top: 3px; left: 5px; font-size: 10px; color: rgba(239, 68, 68, 0.7);
-            font-family: 'Montserrat', sans-serif; font-weight: 800; pointer-events: none;
-        }
-
+        .eng-char { position: absolute; top: 3px; left: 5px; font-size: 10px; color: rgba(239, 68, 68, 0.7); font-family: 'Montserrat', sans-serif; font-weight: 800; pointer-events: none; }
         .key .shift-char { font-size: 11px; color: var(--text-muted); padding-left: 12px;}
         .key .base-char { font-weight: bold; align-self: center;}
         
-        .key.highlight { 
-            background: var(--correct-color) !important; 
-            border-color: #16a34a !important; 
-            box-shadow: 0 5px 0 #15803d, 0 0 15px rgba(16, 185, 129, 0.5) !important; 
-            color: white; 
-            z-index: 10;
-        }
-        .key.highlight-error { 
-            background: var(--incorrect-color) !important; 
-            border-color: #b91c1c !important; 
-            box-shadow: 0 5px 0 #991b1b, 0 0 15px rgba(239, 68, 68, 0.6) !important; 
-            color: white; 
-            z-index: 10; 
-            animation: blink-error 0.5s infinite alternate; 
-        }
+        .key.highlight { background: var(--correct-color) !important; border-color: #16a34a !important; box-shadow: 0 5px 0 #15803d, 0 0 15px rgba(16, 185, 129, 0.5) !important; color: white; z-index: 10; }
+        .key.highlight-error { background: var(--incorrect-color) !important; border-color: #b91c1c !important; box-shadow: 0 5px 0 #991b1b, 0 0 15px rgba(239, 68, 68, 0.6) !important; color: white; z-index: 10; animation: blink-error 0.5s infinite alternate; }
         @keyframes blink-error { from { opacity: 1; } to { opacity: 0.7; } }
         
         .key.highlight .shift-char, .key.highlight .base-char, .key.highlight .eng-char, .key.highlight-error .shift-char, .key.highlight-error .base-char, .key.highlight-error .eng-char { color: white; }
-        .key.pressed { transform: translateY(5px); box-shadow: 0 0 0 var(--key-shadow) !important; }
+        .key.pressed { transform: translateY(5px); box-shadow: 0 0 0 var(--key-shadow) !important; background: #e2e8f0; }
+        [data-theme="dark"] .key.pressed { background: #475569; }
         
         .key.wide { width: 70px; justify-content: center; font-family: sans-serif; font-size: 12px;}
         .key.wider { width: 90px; justify-content: center; font-family: sans-serif; font-size: 12px;}
         .key.space { width: 290px; justify-content: center;}
 
         /* ================= NÚT ĐIỀU KHIỂN NỔI ================= */
-        .floating-controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
+        .floating-controls { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+        .floating-btn { width: 55px; height: 55px; background: var(--primary); color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 var(--primary-shadow); transition: all 0.2s; transform: translateY(0); animation: pulse 2s infinite; }
+        .floating-btn:nth-child(2) { background: var(--gold-accent); box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 var(--gold-shadow); animation-delay: 1s; }
+        .floating-btn:nth-child(3) { background: #10b981; box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 #059669; animation: none;} 
+        .floating-btn.muted { background: #ef4444 !important; box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 #b91c1c !important; }
 
-        .floating-btn {
-            width: 55px;
-            height: 55px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 var(--primary-shadow); 
-            transition: all 0.2s;
-            transform: translateY(0);
-            animation: pulse 2s infinite;
-        }
-        
-        .floating-btn:nth-child(2) {
-            background: var(--gold-accent);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2), 0 5px 0 var(--gold-shadow);
-            animation-delay: 1s;
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .floating-btn:active { box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 1px 0 var(--primary-shadow); transform: translateY(4px) scale(0.95); animation: none; }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .floating-btn:active {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 1px 0 var(--primary-shadow);
-            transform: translateY(4px) scale(0.95);
-            animation: none;
-        }
-
-        .floating-btn::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            right: 70px;
-            background: #1e293b;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        .floating-btn::after { content: attr(data-tooltip); position: absolute; right: 70px; background: #1e293b; color: white; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: bold; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         [data-theme="dark"] .floating-btn::after { background: var(--gold-accent); color: #1e293b; }
         .floating-btn:hover::after { opacity: 1; visibility: visible; }
 
@@ -388,27 +232,20 @@
 
         @media (max-width: 900px) {
             .hand-svg { display: none; }
-            .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 15px;}
+            .stats-bar { grid-template-columns: repeat(3, 1fr); gap: 15px;}
             .keyboard-wrapper { gap: 10px; }
             .floating-controls { bottom: 20px; right: 20px; }
             .header h1 { font-size: 24px; }
             .km-title { font-size: 28px; }
         }
+        @media (max-width: 600px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } .mg-header { flex-direction: column; gap: 10px;} }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 id="ui-title" class="vi-title">
-                <span class="title-icon">⚜️</span>
-                <span id="title-text">Luyện gõ Tiếng Khmer</span>
-                <span class="title-icon">⚜️</span>
-            </h1>
-            
-            <div class="kbach-divider">
-                <span>❖</span>
-            </div>
-
+            <h1 id="ui-title" class="vi-title"><span class="title-icon">⚜️</span><span id="title-text">Luyện gõ Tiếng Khmer</span><span class="title-icon">⚜️</span></h1>
+            <div class="kbach-divider"><span>❖</span></div>
             <div class="controls">
                 <select id="levelSelect">
                     <option value="1" id="ui-lv1">Cấp độ 1: Chữ cái cơ bản (Dễ)</option>
@@ -417,119 +254,85 @@
                 </select>
                 <button class="btn btn-secondary" id="toggleCustomBtn">📝 Nhập văn bản</button>
                 <button class="btn" id="resetBtn">🔄 Thử câu khác</button>
+                <button class="btn" id="miniGameBtn">🎮 Mini Game</button>
             </div>
         </div>
 
-        <div class="custom-text-section" id="customTextSection">
-            <textarea id="customTextInput" rows="3" placeholder="Dán văn bản tiếng Khmer của bạn vào đây..."></textarea>
-            <button class="btn" id="startCustomBtn">Bắt đầu gõ</button>
+        <div id="normalModeUI">
+            <div class="custom-text-section" id="customTextSection">
+                <textarea id="customTextInput" rows="3" placeholder="Dán văn bản tiếng Khmer của bạn vào đây..."></textarea>
+                <button class="btn" id="startCustomBtn">Bắt đầu gõ</button>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item"><span class="stat-value" id="time">00:00</span><span class="stat-label" id="ui-stat-time">Thời gian</span></div>
+                <div class="stat-item"><span class="stat-value" id="wpm">0</span><span class="stat-label">WPM</span></div>
+                <div class="stat-item"><span class="stat-value" id="mistakes">0</span><span class="stat-label" id="ui-stat-mistakes">Lỗi sai</span></div>
+                <div class="stat-item"><span class="stat-value" id="accuracy">100%</span><span class="stat-label" id="ui-stat-accuracy">Chính xác</span></div>
+                <div class="stat-item"><span class="stat-value" id="bestWpm">0</span><span class="stat-label" id="ui-stat-best">🏆 Kỷ lục</span></div>
+            </div>
+            
+            <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+            <div class="font-controls">
+                <button class="font-btn" id="fontMinus" title="Thu nhỏ chữ">A-</button>
+                <button class="font-btn" id="fontPlus" title="Phóng to chữ">A+</button>
+            </div>
+
+            <div class="typing-area" onclick="document.getElementById('inputField').focus()">
+                <div class="text-display" id="textDisplay"></div>
+                <div class="typed-display" id="typedDisplay"></div>
+            </div>
+            
+            <input type="text" class="input-field" id="inputField" autocomplete="off">
         </div>
 
-        <div class="stats-bar">
-            <div class="stat-item"><span class="stat-value" id="time">00:00</span><span class="stat-label" id="ui-stat-time">Thời gian</span></div>
-            <div class="stat-item"><span class="stat-value" id="wpm">0</span><span class="stat-label">WPM</span></div>
-            <div class="stat-item"><span class="stat-value" id="mistakes">0</span><span class="stat-label" id="ui-stat-mistakes">Lỗi sai</span></div>
-            <div class="stat-item"><span class="stat-value" id="accuracy">100%</span><span class="stat-label" id="ui-stat-accuracy">Chính xác</span></div>
+        <div id="miniGameUI">
+            <div class="mg-header">
+                <div class="mg-score" id="ui-mg-scoreTxt">Điểm: <span id="mgScoreVal" style="font-weight: 800; font-size: 28px;">0</span></div>
+                <div class="mg-lives" id="mgLivesVal">❤️❤️❤️</div>
+                <button class="btn btn-secondary" id="mgCloseBtn">❌ Đóng Game</button>
+            </div>
+            
+            <div id="mgBoard">
+                <div id="mgStartScreen">
+                    <h2 id="ui-mg-title">Mini Game: Chữ Rơi</h2>
+                    
+                    <p id="ui-mg-desc" style="font-size: 18px; margin-bottom: 15px;">Gõ chính xác các chữ rơi xuống trước khi chúng chạm đáy!</p>
+                    <p id="ui-mg-score-display" style="display: none; font-size: 24px;"><span id="ui-mg-score-label">Điểm của bạn:</span> <strong id="ui-mg-final-score" style="color:var(--gold-accent); font-size:36px;">0</strong></p>
+                    
+                    <select id="mgDifficulty" class="mg-select">
+                        <option value="slow" id="ui-mg-slow">🐌 Mức độ: Chậm</option>
+                        <option value="normal" id="ui-mg-normal" selected>🚶 Mức độ: Bình thường</option>
+                        <option value="fast" id="ui-mg-fast">🏃 Mức độ: Nhanh</option>
+                    </select>
+
+                    <button class="btn" id="mgStartBtn" style="font-size: 18px; padding: 15px 30px;">▶ Bắt đầu chơi</button>
+                </div>
+                </div>
+            
+            <input type="text" id="mgInput" class="mg-input" placeholder="Gõ chữ rơi ở đây..." autocomplete="off">
         </div>
-        
-        <div class="typing-area" onclick="document.getElementById('inputField').focus()">
-            <div class="text-display" id="textDisplay"></div>
-            <div class="typed-display" id="typedDisplay"></div>
-        </div>
-        
-        <input type="text" class="input-field" id="inputField" autocomplete="off">
-        
+
         <div class="keyboard-wrapper">
-            <svg viewBox="0 0 120 150" class="hand-svg">
-                <rect x="15" y="70" width="76" height="60" rx="15" class="palm"/>
-                <rect id="L1" x="15" y="35" width="16" height="45" rx="8" class="finger"/>
-                <rect id="L2" x="35" y="15" width="16" height="65" rx="8" class="finger"/>
-                <rect id="L3" x="55" y="5" width="16" height="75" rx="8" class="finger"/>
-                <rect id="L4" x="75" y="20" width="16" height="60" rx="8" class="finger"/>
-                <rect id="L5" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/>
-            </svg>
+            <svg viewBox="0 0 120 150" class="hand-svg"><rect x="15" y="70" width="76" height="60" rx="15" class="palm"/><rect id="L1" x="15" y="35" width="16" height="45" rx="8" class="finger"/><rect id="L2" x="35" y="15" width="16" height="65" rx="8" class="finger"/><rect id="L3" x="55" y="5" width="16" height="75" rx="8" class="finger"/><rect id="L4" x="75" y="20" width="16" height="60" rx="8" class="finger"/><rect id="L5" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/></svg>
 
             <div class="keyboard" id="keyboard">
-                <div class="key-row">
-                    <div class="key" id="KeyBacktick"><span class="eng-char">`</span><span class="shift-char">~</span><span class="base-char">`</span></div>
-                    <div class="key" id="Digit1"><span class="eng-char">1</span><span class="shift-char">!</span><span class="base-char">1</span></div>
-                    <div class="key" id="Digit2"><span class="eng-char">2</span><span class="shift-char">@</span><span class="base-char">2</span></div>
-                    <div class="key" id="Digit3"><span class="eng-char">3</span><span class="shift-char">#</span><span class="base-char">3</span></div>
-                    <div class="key" id="Digit4"><span class="eng-char">4</span><span class="shift-char">$</span><span class="base-char">4</span></div>
-                    <div class="key" id="Digit5"><span class="eng-char">5</span><span class="shift-char">%</span><span class="base-char">5</span></div>
-                    <div class="key" id="Digit6"><span class="eng-char">6</span><span class="shift-char">^</span><span class="base-char">6</span></div>
-                    <div class="key" id="Digit7"><span class="eng-char">7</span><span class="shift-char">&</span><span class="base-char">7</span></div>
-                    <div class="key" id="Digit8"><span class="eng-char">8</span><span class="shift-char">*</span><span class="base-char">8</span></div>
-                    <div class="key" id="Digit9"><span class="eng-char">9</span><span class="shift-char">(</span><span class="base-char">9</span></div>
-                    <div class="key" id="Digit0"><span class="eng-char">0</span><span class="shift-char">)</span><span class="base-char">0</span></div>
-                    <div class="key" id="Minus"><span class="eng-char">-</span><span class="shift-char">_</span><span class="base-char">-</span></div>
-                    <div class="key" id="Equal"><span class="eng-char">=</span><span class="shift-char">+</span><span class="base-char">=</span></div>
-                    <div class="key wide" id="Backspace">Back</div>
-                </div>
-                <div class="key-row">
-                    <div class="key wide">Tab</div>
-                    <div class="key" id="KeyQ"><span class="eng-char">Q</span><span class="shift-char">ឈ</span><span class="base-char">ឆ</span></div>
-                    <div class="key" id="KeyW"><span class="eng-char">W</span><span class="shift-char">ឺ</span><span class="base-char">ឹ</span></div>
-                    <div class="key" id="KeyE"><span class="eng-char">E</span><span class="shift-char">ែ</span><span class="base-char">េ</span></div>
-                    <div class="key" id="KeyR"><span class="eng-char">R</span><span class="shift-char">ឬ</span><span class="base-char">រ</span></div>
-                    <div class="key" id="KeyT"><span class="eng-char">T</span><span class="shift-char">ទ</span><span class="base-char">ត</span></div>
-                    <div class="key" id="KeyY"><span class="eng-char">Y</span><span class="shift-char">ួ</span><span class="base-char">យ</span></div>
-                    <div class="key" id="KeyU"><span class="eng-char">U</span><span class="shift-char">ូ</span><span class="base-char">ុ</span></div>
-                    <div class="key" id="KeyI"><span class="eng-char">I</span><span class="shift-char">ី</span><span class="base-char">ិ</span></div>
-                    <div class="key" id="KeyO"><span class="eng-char">O</span><span class="shift-char">ៅ</span><span class="base-char">ោ</span></div>
-                    <div class="key" id="KeyP"><span class="eng-char">P</span><span class="shift-char">ភ</span><span class="base-char">ផ</span></div>
-                    <div class="key" id="BracketLeft"><span class="eng-char">[</span><span class="shift-char">ឿ</span><span class="base-char">ៀ</span></div>
-                    <div class="key" id="BracketRight"><span class="eng-char">]</span><span class="shift-char">ឳ</span><span class="base-char">ឪ</span></div>
-                    <div class="key" id="Backslash"><span class="eng-char">\</span><span class="shift-char">|</span><span class="base-char">\</span></div>
-                </div>
-                <div class="key-row">
-                    <div class="key wider">Caps</div>
-                    <div class="key" id="KeyA"><span class="eng-char">A</span><span class="shift-char">ាំ</span><span class="base-char">ា</span></div>
-                    <div class="key" id="KeyS"><span class="eng-char">S</span><span class="shift-char">ៃ</span><span class="base-char">ស</span></div>
-                    <div class="key" id="KeyD"><span class="eng-char">D</span><span class="shift-char">ឌ</span><span class="base-char">ដ</span></div>
-                    <div class="key" id="KeyF"><span class="eng-char">F</span><span class="shift-char">ធ</span><span class="base-char">ថ</span></div>
-                    <div class="key" id="KeyG"><span class="eng-char">G</span><span class="shift-char">អ</span><span class="base-char">ង</span></div>
-                    <div class="key" id="KeyH"><span class="eng-char">H</span><span class="shift-char">ះ</span><span class="base-char">ហ</span></div>
-                    <div class="key" id="KeyJ"><span class="eng-char">J</span><span class="shift-char">ញ</span><span class="base-char">្</span></div>
-                    <div class="key" id="KeyK"><span class="eng-char">K</span><span class="shift-char">គ</span><span class="base-char">ក</span></div>
-                    <div class="key" id="KeyL"><span class="eng-char">L</span><span class="shift-char">ឡ</span><span class="base-char">ល</span></div>
-                    <div class="key" id="Semicolon"><span class="eng-char">;</span><span class="shift-char">៖</span><span class="base-char">ើ</span></div>
-                    <div class="key" id="Quote"><span class="eng-char">'</span><span class="shift-char">៉</span><span class="base-char">់</span></div>
-                    <div class="key wider" id="Enter">Enter</div>
-                </div>
-                <div class="key-row">
-                    <div class="key wider" id="KeyShiftLeft">Shift</div>
-                    <div class="key" id="KeyZ"><span class="eng-char">Z</span><span class="shift-char">ឍ</span><span class="base-char">ឋ</span></div>
-                    <div class="key" id="KeyX"><span class="eng-char">X</span><span class="shift-char">ឃ</span><span class="base-char">ខ</span></div>
-                    <div class="key" id="KeyC"><span class="eng-char">C</span><span class="shift-char">ជ</span><span class="base-char">ច</span></div>
-                    <div class="key" id="KeyV"><span class="eng-char">V</span><span class="shift-char">៌</span><span class="base-char">វ</span></div>
-                    <div class="key" id="KeyB"><span class="eng-char">B</span><span class="shift-char">ព</span><span class="base-char">ប</span></div>
-                    <div class="key" id="KeyN"><span class="eng-char">N</span><span class="shift-char">ណ</span><span class="base-char">ន</span></div>
-                    <div class="key" id="KeyM"><span class="eng-char">M</span><span class="shift-char">ំ</span><span class="base-char">ម</span></div>
-                    <div class="key" id="Comma"><span class="eng-char">,</span><span class="shift-char">ៗ</span><span class="base-char">,</span></div>
-                    <div class="key" id="Period"><span class="eng-char">.</span><span class="shift-char">៕</span><span class="base-char">។</span></div>
-                    <div class="key" id="Slash"><span class="eng-char">/</span><span class="shift-char">?</span><span class="base-char">/</span></div>
-                    <div class="key wider" id="KeyShiftRight">Shift</div>
-                </div>
-                <div class="key-row">
-                    <div class="key space" id="Space">Space</div>
-                </div>
+                <div class="key-row"><div class="key" id="KeyBacktick"><span class="eng-char">`</span><span class="shift-char">~</span><span class="base-char">`</span></div><div class="key" id="Digit1"><span class="eng-char">1</span><span class="shift-char">!</span><span class="base-char">1</span></div><div class="key" id="Digit2"><span class="eng-char">2</span><span class="shift-char">@</span><span class="base-char">2</span></div><div class="key" id="Digit3"><span class="eng-char">3</span><span class="shift-char">#</span><span class="base-char">3</span></div><div class="key" id="Digit4"><span class="eng-char">4</span><span class="shift-char">$</span><span class="base-char">4</span></div><div class="key" id="Digit5"><span class="eng-char">5</span><span class="shift-char">%</span><span class="base-char">5</span></div><div class="key" id="Digit6"><span class="eng-char">6</span><span class="shift-char">^</span><span class="base-char">6</span></div><div class="key" id="Digit7"><span class="eng-char">7</span><span class="shift-char">&</span><span class="base-char">7</span></div><div class="key" id="Digit8"><span class="eng-char">8</span><span class="shift-char">*</span><span class="base-char">8</span></div><div class="key" id="Digit9"><span class="eng-char">9</span><span class="shift-char">(</span><span class="base-char">9</span></div><div class="key" id="Digit0"><span class="eng-char">0</span><span class="shift-char">)</span><span class="base-char">0</span></div><div class="key" id="Minus"><span class="eng-char">-</span><span class="shift-char">_</span><span class="base-char">-</span></div><div class="key" id="Equal"><span class="eng-char">=</span><span class="shift-char">+</span><span class="base-char">=</span></div><div class="key wide" id="Backspace">Back</div></div>
+                <div class="key-row"><div class="key wide">Tab</div><div class="key" id="KeyQ"><span class="eng-char">Q</span><span class="shift-char">ឈ</span><span class="base-char">ឆ</span></div><div class="key" id="KeyW"><span class="eng-char">W</span><span class="shift-char">ឺ</span><span class="base-char">ឹ</span></div><div class="key" id="KeyE"><span class="eng-char">E</span><span class="shift-char">ែ</span><span class="base-char">េ</span></div><div class="key" id="KeyR"><span class="eng-char">R</span><span class="shift-char">ឬ</span><span class="base-char">រ</span></div><div class="key" id="KeyT"><span class="eng-char">T</span><span class="shift-char">ទ</span><span class="base-char">ត</span></div><div class="key" id="KeyY"><span class="eng-char">Y</span><span class="shift-char">ួ</span><span class="base-char">យ</span></div><div class="key" id="KeyU"><span class="eng-char">U</span><span class="shift-char">ូ</span><span class="base-char">ុ</span></div><div class="key" id="KeyI"><span class="eng-char">I</span><span class="shift-char">ី</span><span class="base-char">ិ</span></div><div class="key" id="KeyO"><span class="eng-char">O</span><span class="shift-char">ៅ</span><span class="base-char">ោ</span></div><div class="key" id="KeyP"><span class="eng-char">P</span><span class="shift-char">ភ</span><span class="base-char">ផ</span></div><div class="key" id="BracketLeft"><span class="eng-char">[</span><span class="shift-char">ឿ</span><span class="base-char">ៀ</span></div><div class="key" id="BracketRight"><span class="eng-char">]</span><span class="shift-char">ឳ</span><span class="base-char">ឪ</span></div><div class="key" id="Backslash"><span class="eng-char">\</span><span class="shift-char">|</span><span class="base-char">\</span></div></div>
+                <div class="key-row"><div class="key wider">Caps</div><div class="key" id="KeyA"><span class="eng-char">A</span><span class="shift-char">ាំ</span><span class="base-char">ា</span></div><div class="key" id="KeyS"><span class="eng-char">S</span><span class="shift-char">ៃ</span><span class="base-char">ស</span></div><div class="key" id="KeyD"><span class="eng-char">D</span><span class="shift-char">ឌ</span><span class="base-char">ដ</span></div><div class="key" id="KeyF"><span class="eng-char">F</span><span class="shift-char">ធ</span><span class="base-char">ថ</span></div><div class="key" id="KeyG"><span class="eng-char">G</span><span class="shift-char">អ</span><span class="base-char">ង</span></div><div class="key" id="KeyH"><span class="eng-char">H</span><span class="shift-char">ះ</span><span class="base-char">ហ</span></div><div class="key" id="KeyJ"><span class="eng-char">J</span><span class="shift-char">ញ</span><span class="base-char">្</span></div><div class="key" id="KeyK"><span class="eng-char">K</span><span class="shift-char">គ</span><span class="base-char">ក</span></div><div class="key" id="KeyL"><span class="eng-char">L</span><span class="shift-char">ឡ</span><span class="base-char">ល</span></div><div class="key" id="Semicolon"><span class="eng-char">;</span><span class="shift-char">៖</span><span class="base-char">ើ</span></div><div class="key" id="Quote"><span class="eng-char">'</span><span class="shift-char">៉</span><span class="base-char">់</span></div><div class="key wider" id="Enter">Enter</div></div>
+                <div class="key-row"><div class="key wider" id="KeyShiftLeft">Shift</div><div class="key" id="KeyZ"><span class="eng-char">Z</span><span class="shift-char">ឍ</span><span class="base-char">ឋ</span></div><div class="key" id="KeyX"><span class="eng-char">X</span><span class="shift-char">ឃ</span><span class="base-char">ខ</span></div><div class="key" id="KeyC"><span class="eng-char">C</span><span class="shift-char">ជ</span><span class="base-char">ច</span></div><div class="key" id="KeyV"><span class="eng-char">V</span><span class="shift-char">៌</span><span class="base-char">វ</span></div><div class="key" id="KeyB"><span class="eng-char">B</span><span class="shift-char">ព</span><span class="base-char">ប</span></div><div class="key" id="KeyN"><span class="eng-char">N</span><span class="shift-char">ណ</span><span class="base-char">ន</span></div><div class="key" id="KeyM"><span class="eng-char">M</span><span class="shift-char">ំ</span><span class="base-char">ម</span></div><div class="key" id="Comma"><span class="eng-char">,</span><span class="shift-char">ៗ</span><span class="base-char">,</span></div><div class="key" id="Period"><span class="eng-char">.</span><span class="shift-char">៕</span><span class="base-char">។</span></div><div class="key" id="Slash"><span class="eng-char">/</span><span class="shift-char">?</span><span class="base-char">/</span></div><div class="key wider" id="KeyShiftRight">Shift</div></div>
+                <div class="key-row"><div class="key space" id="Space">Space</div></div>
             </div>
 
-            <svg viewBox="0 0 120 150" class="hand-svg" style="transform: scaleX(-1);">
-                <rect x="15" y="70" width="76" height="60" rx="15" class="palm"/>
-                <rect id="R5" x="15" y="35" width="16" height="45" rx="8" class="finger"/>
-                <rect id="R4" x="35" y="15" width="16" height="65" rx="8" class="finger"/>
-                <rect id="R3" x="55" y="5" width="16" height="75" rx="8" class="finger"/>
-                <rect id="R2" x="75" y="20" width="16" height="60" rx="8" class="finger"/>
-                <rect id="R1" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/>
-            </svg>
+            <svg viewBox="0 0 120 150" class="hand-svg" style="transform: scaleX(-1);"><rect x="15" y="70" width="76" height="60" rx="15" class="palm"/><rect id="R5" x="15" y="35" width="16" height="45" rx="8" class="finger"/><rect id="R4" x="35" y="15" width="16" height="65" rx="8" class="finger"/><rect id="R3" x="55" y="5" width="16" height="75" rx="8" class="finger"/><rect id="R2" x="75" y="20" width="16" height="60" rx="8" class="finger"/><rect id="R1" x="90" y="65" width="16" height="45" rx="8" transform="rotate(-35 90 65)" class="finger"/></svg>
         </div>
     </div>
 
     <div class="floating-controls">
         <button class="floating-btn" id="langToggle" data-tooltip="ភាសាខ្មែរ">🌐</button>
         <button class="floating-btn" id="themeToggle" data-tooltip="Giao diện sáng/tối">🌓</button>
+        <button class="floating-btn" id="soundToggle" data-tooltip="Tắt/Mở Âm Thanh">🔊</button>
     </div>
 
     <div class="footer">
@@ -537,77 +340,287 @@
     </div>
 
     <script>
+        // ================= DỮ LIỆU ĐA NGÔN NGỮ =================
         let currentLang = 'vi';
         const translations = {
-            vi: { title: "Luyện gõ Tiếng Khmer", titleClass: "vi-title", lv1: "Cấp độ 1: Chữ cái cơ bản (Dễ)", lv2: "Cấp độ 2: Từ vựng & Giao tiếp (Vừa)", lv3: "Cấp độ 3: Ca dao, Tục ngữ (Khó)", customBtn: "📝 Nhập văn bản", resetBtn: "🔄 Thử câu khác", customPlaceholder: "Dán văn bản tiếng Khmer của bạn vào đây...", startCustomBtn: "Bắt đầu gõ", statTime: "Thời gian", statMistakes: "Lỗi sai", statAccuracy: "Chính xác", author: "Tác giả", alertText: "Vui lòng nhập văn bản tiếng Khmer trước!", langTooltip: "ភាសាខ្មែរ", themeTooltip: "Giao diện sáng/tối" },
-            km: { title: "អនុវត្តវាយអក្សរខ្មែរ", titleClass: "km-title", lv1: "កម្រិត ១៖ អក្សរមូលដ្ឋាន (ងាយ)", lv2: "កម្រិត ២៖ ពាក្យសន្ទនា (មធ្យម)", lv3: "កម្រិត ៣៖ សុភាសិត (ពិបាក)", customBtn: "📝 បញ្ចូលអត្ថបទ", resetBtn: "🔄 សាកល្បងប្រយោគផ្សេង", customPlaceholder: "បិទភ្ជាប់អត្ថបទខ្មែររបស់អ្នកនៅទីនេះ...", startCustomBtn: "ចាប់ផ្តើមវាយ", statTime: "ពេលវេលា", statMistakes: "កំហុស", statAccuracy: "ភាពត្រឹមត្រូវ", author: "អ្នកបង្កើត", alertText: "សូមបញ្ចូលអត្ថបទជាភាសាខ្មែរសិន!", langTooltip: "Tiếng Việt", themeTooltip: "រចនាប័ទ្ម ភ្លឺ/ងងឹត" }
+            vi: { 
+                title: "Luyện gõ Tiếng Khmer", titleClass: "vi-title", lv1: "Cấp độ 1: Chữ cái cơ bản (Dễ)", lv2: "Cấp độ 2: Từ vựng & Giao tiếp (Vừa)", lv3: "Cấp độ 3: Ca dao, Tục ngữ (Khó)", 
+                customBtn: "📝 Nhập văn bản", resetBtn: "🔄 Thử câu khác/Enter", customPlaceholder: "Dán văn bản tiếng Khmer của bạn vào đây...", startCustomBtn: "Bắt đầu gõ", 
+                statTime: "Thời gian", statMistakes: "Lỗi sai", statAccuracy: "Chính xác", statBest: "🏆 Kỷ lục", author: "Tác giả", alertText: "Vui lòng nhập văn bản tiếng Khmer trước!", 
+                langTooltip: "ភាសាខ្មែរ", themeTooltip: "Giao diện sáng/tối", soundTooltip: "Tắt/Mở Âm Thanh", 
+                mgBtn: "🎮 Mini Game", mgScore: "Điểm:", mgClose: "❌ Đóng Game", mgTitle: "Mini Game: Chữ Rơi", mgDesc: "Gõ chính xác các chữ rơi xuống trước khi chúng chạm đáy!", mgStart: "▶ Bắt đầu chơi", mgPlaceholder: "Gõ chữ rơi ở đây (Nhấn Enter để xóa)...", mgGameOver: "Trò chơi kết thúc!", mgReplay: "▶ Chơi lại", mgFinalScore: "Điểm của bạn:",
+                mgSlow: "🐌 Mức độ: Chậm", mgNormal: "🚶 Mức độ: Bình thường", mgFast: "🏃 Mức độ: Nhanh"
+            },
+            km: { 
+                title: "អនុវត្តវាយអក្សរខ្មែរ", titleClass: "km-title", lv1: "កម្រិត ១៖ អក្សរមូលដ្ឋាន (ងាយ)", lv2: "កម្រិត ២៖ ពាក្យសន្ទនា (មធ្យម)", lv3: "កម្រិត ៣៖ សុភាសិត (ពិបាក)", 
+                customBtn: "📝 បញ្ចូលអត្ថបទ", resetBtn: "🔄 សាកល្បងប្រយោគផ្សេង/Enter", customPlaceholder: "បិទភ្ជាប់អត្ថបទខ្មែររបស់អ្នកនៅទីនេះ...", startCustomBtn: "ចាប់ផ្តើមវាយ", 
+                statTime: "ពេលវេលា", statMistakes: "កំហុស", statAccuracy: "ភាពត្រឹមត្រូវ", statBest: "🏆 កំណត់ត្រា", author: "អ្នកបង្កើត", alertText: "សូមបញ្ចូលអត្ថបទជាភាសាខ្មែរសិន!", 
+                langTooltip: "Tiếng Việt", themeTooltip: "រចនាប័ទ្ម ភ្លឺ/ងងឹត", soundTooltip: "បិទ/បើកសំឡេង", 
+                mgBtn: "🎮 Mini Game", mgScore: "ពិន្ទុ៖", mgClose: "❌ បិទហ្គេម", mgTitle: "ហ្គេមតូច៖ អក្សរធ្លាក់", mgDesc: "វាយអក្សរដែលធ្លាក់ឱ្យបានត្រឹមត្រូវមុនពេលវាប៉ះបាត!", mgStart: "▶ ចាប់ផ្តើមលេង", mgPlaceholder: "វាយអក្សរធ្លាក់នៅទីនេះ (ចុច Enter ដើម្បីលុប)...", mgGameOver: "ហ្គេមចប់ហើយ!", mgReplay: "▶ លេងម្តងទៀត", mgFinalScore: "ពិន្ទុរបស់អ្នក៖",
+                mgSlow: "🐌 កម្រិត៖ យឺត", mgNormal: "🚶 កម្រិត៖ ធម្មតា", mgFast: "🏃 កម្រិត៖ លឿន"
+            }
         };
 
-        const langToggleBtn = document.getElementById("langToggle");
-        const uiTitle = document.getElementById("ui-title");
-        const titleText = document.getElementById("title-text");
+        const langToggleBtn = document.getElementById("langToggle"), uiTitle = document.getElementById("ui-title"), titleText = document.getElementById("title-text");
         
         langToggleBtn.addEventListener("click", () => {
             currentLang = currentLang === 'vi' ? 'km' : 'vi';
             langToggleBtn.setAttribute('data-tooltip', translations[currentLang].langTooltip);
-            titleText.innerText = translations[currentLang].title;
-            uiTitle.className = translations[currentLang].titleClass;
-            document.getElementById("ui-lv1").innerText = translations[currentLang].lv1;
-            document.getElementById("ui-lv2").innerText = translations[currentLang].lv2;
-            document.getElementById("ui-lv3").innerText = translations[currentLang].lv3;
-            document.getElementById("toggleCustomBtn").innerText = translations[currentLang].customBtn;
-            document.getElementById("resetBtn").innerText = translations[currentLang].resetBtn;
-            document.getElementById("customTextInput").placeholder = translations[currentLang].customPlaceholder;
-            document.getElementById("startCustomBtn").innerText = translations[currentLang].startCustomBtn;
-            document.getElementById("ui-stat-time").innerText = translations[currentLang].statTime;
-            document.getElementById("ui-stat-mistakes").innerText = translations[currentLang].statMistakes;
-            document.getElementById("ui-stat-accuracy").innerText = translations[currentLang].statAccuracy;
+            titleText.innerText = translations[currentLang].title; uiTitle.className = translations[currentLang].titleClass;
+            document.getElementById("ui-lv1").innerText = translations[currentLang].lv1; document.getElementById("ui-lv2").innerText = translations[currentLang].lv2; document.getElementById("ui-lv3").innerText = translations[currentLang].lv3;
+            document.getElementById("toggleCustomBtn").innerText = translations[currentLang].customBtn; document.getElementById("resetBtn").innerText = translations[currentLang].resetBtn;
+            document.getElementById("customTextInput").placeholder = translations[currentLang].customPlaceholder; document.getElementById("startCustomBtn").innerText = translations[currentLang].startCustomBtn;
+            document.getElementById("ui-stat-time").innerText = translations[currentLang].statTime; document.getElementById("ui-stat-mistakes").innerText = translations[currentLang].statMistakes;
+            document.getElementById("ui-stat-accuracy").innerText = translations[currentLang].statAccuracy; document.getElementById("ui-stat-best").innerText = translations[currentLang].statBest;
             document.getElementById("ui-author").innerText = translations[currentLang].author;
             document.getElementById("themeToggle").setAttribute('data-tooltip', translations[currentLang].themeTooltip);
+            document.getElementById("soundToggle").setAttribute('data-tooltip', translations[currentLang].soundTooltip);
+            
+            // Dịch UI Minigame
+            document.getElementById("miniGameBtn").innerText = translations[currentLang].mgBtn;
+            document.getElementById("ui-mg-scoreTxt").innerHTML = translations[currentLang].mgScore + ' <span id="mgScoreVal" style="font-weight: 800; font-size: 28px;">' + mgScore + '</span>';
+            document.getElementById("mgCloseBtn").innerText = translations[currentLang].mgClose;
+            
+            if (document.getElementById("ui-mg-title")) document.getElementById("ui-mg-title").innerText = isMiniGamePlaying ? translations[currentLang].mgGameOver : translations[currentLang].mgTitle;
+            if (document.getElementById("ui-mg-desc")) document.getElementById("ui-mg-desc").innerText = translations[currentLang].mgDesc;
+            if (document.getElementById("mgStartBtn")) document.getElementById("mgStartBtn").innerText = isMiniGamePlaying ? translations[currentLang].mgReplay : translations[currentLang].mgStart;
+            if (document.getElementById("ui-mg-score-label")) document.getElementById("ui-mg-score-label").innerText = translations[currentLang].mgFinalScore;
+            
+            // Dịch bộ chọn độ khó
+            if (document.getElementById("ui-mg-slow")) {
+                document.getElementById("ui-mg-slow").innerText = translations[currentLang].mgSlow;
+                document.getElementById("ui-mg-normal").innerText = translations[currentLang].mgNormal;
+                document.getElementById("ui-mg-fast").innerText = translations[currentLang].mgFast;
+            }
+            document.getElementById("mgInput").placeholder = translations[currentLang].mgPlaceholder;
         });
 
-        const levelsData = {
-            "1": ["ក ខ គ ឃ ង", "ច ឆ ជ ឈ ញ", "ដ ឋ ឌ ឍ ណ", "ត ថ ទ ធ ន", "ប ផ ព ភ ម", "យ រ ល វ ស ហ ឡ អ", "ស្រៈនិស្ស័យ", "ា ិ ី ឹ ឺ ុ ូ ួ ើ ឿ ៀ េ ែ ៃ ោ ៅ", "ុំ ំ ាំ ះ ុះ េះ ោះ", "កា កិ កី កឹ កឺ", "កុ កូ កួ កើ កឿ", "កៀ កេ កែ កៃ កោ", "កៅ កុំ កំ កាំ កះ", "ស ខ ល", "សុខ", "ទុក្ខ", "ធំ", "តូច", "វែង", "ខ្លី"],
-            "2": ["សួស្តី", "អរគុណ", "សុំទោស", "លាហើយ", "បាទ", "ចាស", "មិនអីទេ", "តើអ្នកឈ្មោះអ្វី?", "ខ្ញុំឈ្មោះកក្កដា", "រីករាយដែលបានស្គាល់អ្នក", "តើអ្នកសុខសប្បាយជាទេ?", "ខ្ញុំសុខសប្បាយ", "ចុះអ្នកវិញ?", "ប្រទេសកម្ពុជាមានប្រាសាទអង្គរវត្ត", "ប្រជាជនខ្មែររួសរាយរាក់ទាក់"],
-            "3": ["ចេះមកពីរៀន មានមកពីរក។", "ធ្វើល្អបានល្អ ធ្វើអាក្រក់បានអាក្រក់។", "ទឹកស្រក់តក់ៗទម្លុះថ្មបាន។", "កុំឃើញដំរីជុះ ចង់ជុះតាមដំរី។", "សំណាបយោងដី ស្រីយោងប្រុស។", "ត្រីមួយកន្ត្រក ស្អុយមួយ ស្អុយទាំងអស់។", "សេចក្តីស្រឡាញ់របស់ឪពុកម្តាយគ្មានព្រំដែនឡើយ។", "ពេលវេលាមានតម្លៃជាងមាសប្រាក់ទៅទៀត។", "ការអប់រំមានសារៈសំខាន់ណាស់សម្រាប់ការអភិវឌ្ឍប្រទេស។"]
-        };
-
-        const charToKeyId = {
-            'ឆ': 'KeyQ', 'ឈ': 'KeyQ', 'ឹ': 'KeyW', 'ឺ': 'KeyW', 'េ': 'KeyE', 'ែ': 'KeyE', 'រ': 'KeyR', 'ឬ': 'KeyR', 'ត': 'KeyT', 'ទ': 'KeyT', 'យ': 'KeyY', 'ួ': 'KeyY', 'ុ': 'KeyU', 'ូ': 'KeyU', 'ិ': 'KeyI', 'ី': 'KeyI', 'ោ': 'KeyO', 'ៅ': 'KeyO', 'ផ': 'KeyP', 'ភ': 'KeyP', 'ៀ': 'BracketLeft', 'ឿ': 'BracketLeft', 'ឪ': 'BracketRight', 'ឳ': 'BracketRight',
-            'ា': 'KeyA', 'ាំ': 'KeyA', 'ស': 'KeyS', 'ៃ': 'KeyS', 'ដ': 'KeyD', 'ឌ': 'KeyD', 'ថ': 'KeyF', 'ធ': 'KeyF', 'ង': 'KeyG', 'អ': 'KeyG', 'ហ': 'KeyH', 'ះ': 'KeyH', '្': 'KeyJ', '\u17D2': 'KeyJ', 'ញ': 'KeyJ', 'ក': 'KeyK', 'គ': 'KeyK', 'ល': 'KeyL', 'ឡ': 'KeyL', 'ើ': 'Semicolon', '៖': 'Semicolon', '់': 'Quote', '៉': 'Quote',
-            'ឋ': 'KeyZ', 'ឍ': 'KeyZ', 'ខ': 'KeyX', 'ឃ': 'KeyX', 'ច': 'KeyC', 'ជ': 'KeyC', 'វ': 'KeyV', '៌': 'KeyV', 'ប': 'KeyB', 'ព': 'KeyB', 'ន': 'KeyN', 'ណ': 'KeyN', 'ម': 'KeyM', 'ំ': 'KeyM', ',': 'Comma', 'ៗ': 'Comma', '។': 'Period', '៕': 'Period', '?': 'Slash', '/': 'Slash',
-            ' ': 'Space', '1': 'Digit1', '2': 'Digit2', '3': 'Digit3', '4': 'Digit4', '5': 'Digit5', '6': 'Digit6', '7': 'Digit7', '8': 'Digit8', '9': 'Digit9', '0': 'Digit0',
-            '~': 'KeyBacktick', '!': 'Digit1', '@': 'Digit2', '#': 'Digit3', '$': 'Digit4', '%': 'Digit5', '^': 'Digit6', '&': 'Digit7', '*': 'Digit8', '(': 'Digit9', ')': 'Digit0', '_': 'Minus', '+': 'Equal'
-        };
-
-        const fingerMap = {
-            'KeyBacktick': 'L1', 'Digit1': 'L1', 'KeyQ': 'L1', 'KeyA': 'L1', 'KeyZ': 'L1', 'Digit2': 'L2', 'KeyW': 'L2', 'KeyS': 'L2', 'KeyX': 'L2', 'Digit3': 'L3', 'KeyE': 'L3', 'KeyD': 'L3', 'KeyC': 'L3', 'Digit4': 'L4', 'Digit5': 'L4', 'KeyR': 'L4', 'KeyT': 'L4', 'KeyF': 'L4', 'KeyG': 'L4', 'KeyV': 'L4', 'KeyB': 'L4',
-            'Space': 'thumb', 
-            'Digit6': 'R2', 'Digit7': 'R2', 'KeyY': 'R2', 'KeyU': 'R2', 'KeyH': 'R2', 'KeyJ': 'R2', 'KeyN': 'R2', 'KeyM': 'R2', 'Digit8': 'R3', 'KeyI': 'R3', 'KeyK': 'R3', 'Comma': 'R3', 'Digit9': 'R4', 'KeyO': 'R4', 'KeyL': 'R4', 'Period': 'R4', 'Digit0': 'R5', 'Minus': 'R5', 'Equal': 'R5', 'KeyP': 'R5', 'BracketLeft': 'R5', 'BracketRight': 'R5', 'Backslash': 'R5', 'Semicolon': 'R5', 'Quote': 'R5', 'Slash': 'R5', 'Backspace': 'R5'
-        };
-
+        // ================= CẤU HÌNH BÀN PHÍM & DỮ LIỆU =================
+        const levelsData = { "1": ["ក ខ គ ឃ ង", "ច ឆ ជ ឈ ញ", "ដ ឋ ឌ ឍ ណ", "ត ថ ទ ធ ន", "ប ផ ព ភ ម", "យ រ ល វ ស ហ ឡ អ", "ស្រៈនិស្ស័យ", "ា ិ ី ឹ ឺ ុ ូ ួ ើ ឿ ៀ េ ែ ៃ ោ ៅ", "ុំ ំ ាំ ះ ុះ េះ ោះ", "កា កិ កី កឹ កឺ", "កុ កូ កួ កើ កឿ", "កៀ កេ កែ កៃ កោ", "កៅ កុំ កំ កាំ កះ", "ស ខ ល", "សុខ", "ទុក្ខ", "ធំ", "តូច", "វែង", "ខ្លី"], "2": ["សួស្តី", "អរគុណ", "សុំទោស", "លាហើយ", "បាទ", "ចាស", "តើអ្នកឈ្មោះអ្វី?", "ខ្ញុំឈ្មោះកក្កដា", "រីករាយដែលបានស្គាល់អ្នក", "តើអ្នកសុខសប្បាយជាទេ?", "ខ្ញុំសុខសប្បាយ", "ចុះអ្នកវិញ?", "ប្រទេសកម្ពុជាមានប្រាសាទអង្គរវត្ត", "ប្រជាជនខ្មែររួសរាយរាក់ទាក់"], "3": ["ចេះមកពីរៀន មានមកពីរក។", "ធ្វើល្អបានល្អ ធ្វើអាក្រក់បានអាក្រក់។", "ទឹកស្រក់តក់ៗទម្លុះថ្មបាន។", "កុំឃើញដំរីជុះ ចង់ជុះតាមដំរី។", "សំណាបយោងដី ស្រីយោងប្រុស។", "ត្រីមួយកន្ត្រក ស្អុយមួយ ស្អុយទាំងអស់។", "សេចក្តីស្រឡាញ់របស់ឪពុកម្តាយគ្មានព្រំដែនឡើយ។", "ពេលវេលាមានតម្លៃជាងមាសប្រាក់ទៅទៀត។", "ការអប់រំមានសារៈសំខាន់ណាស់សម្រាប់ការអភិវឌ្ឍប្រទេស។"] };
+        const miniGameWordsList = ["ក", "ខ", "គ", "ឃ", "ង", "ច", "ឆ", "ជ", "ឈ", "ញ", "សួស្តី", "អរគុណ", "សុំទោស", "បាទ", "ចាស", "ធំ", "តូច", "វែង", "ខ្លី", "ឆ្មា", "ឆ្កែ", "ត្រី", "គោ", "មេឃ", "ផ្កាយ", "បាយ", "ទឹក", "ផ្ទះ", "កម្ពុជា", "ខ្មែរ", "ល្អ", "អាក្រក់", "ស", "ខ្មៅ", "ខៀវ"];
+        
+        const charToKeyId = { 'ឆ':'KeyQ', 'ឈ':'KeyQ', 'ឹ':'KeyW', 'ឺ':'KeyW', 'េ':'KeyE', 'ែ':'KeyE', 'រ':'KeyR', 'ឬ':'KeyR', 'ត':'KeyT', 'ទ':'KeyT', 'យ':'KeyY', 'ួ':'KeyY', 'ុ':'KeyU', 'ូ':'KeyU', 'ិ':'KeyI', 'ី':'KeyI', 'ោ':'KeyO', 'ៅ':'KeyO', 'ផ':'KeyP', 'ភ':'KeyP', 'ៀ':'BracketLeft', 'ឿ':'BracketLeft', 'ឪ':'BracketRight', 'ឳ':'BracketRight', 'ា':'KeyA', 'ាំ':'KeyA', 'ស':'KeyS', 'ៃ':'KeyS', 'ដ':'KeyD', 'ឌ':'KeyD', 'ថ':'KeyF', 'ធ':'KeyF', 'ង':'KeyG', 'អ':'KeyG', 'ហ':'KeyH', 'ះ':'KeyH', '្':'KeyJ', '\u17D2':'KeyJ', 'ញ':'KeyJ', 'ក':'KeyK', 'គ':'KeyK', 'ល':'KeyL', 'ឡ':'KeyL', 'ើ':'Semicolon', '៖':'Semicolon', '់':'Quote', '៉':'Quote', 'ឋ':'KeyZ', 'ឍ':'KeyZ', 'ខ':'KeyX', 'ឃ':'KeyX', 'ច':'KeyC', 'ជ':'KeyC', 'វ':'KeyV', '៌':'KeyV', 'ប':'KeyB', 'ព':'KeyB', 'ន':'KeyN', 'ណ':'KeyN', 'ម':'KeyM', 'ំ':'KeyM', ',':'Comma', 'ៗ':'Comma', '។':'Period', '៕':'Period', '?':'Slash', '/':'Slash', ' ':'Space', '1':'Digit1', '2':'Digit2', '3':'Digit3', '4':'Digit4', '5':'Digit5', '6':'Digit6', '7':'Digit7', '8':'Digit8', '9':'Digit9', '0':'Digit0', '~':'KeyBacktick', '!':'Digit1', '@':'Digit2', '#':'Digit3', '$':'Digit4', '%':'Digit5', '^':'Digit6', '&':'Digit7', '*':'Digit8', '(':'Digit9', ')':'Digit0', '_':'Minus', '+':'Equal' };
+        const fingerMap = { 'KeyBacktick':'L1', 'Digit1':'L1', 'KeyQ':'L1', 'KeyA':'L1', 'KeyZ':'L1', 'Digit2':'L2', 'KeyW':'L2', 'KeyS':'L2', 'KeyX':'L2', 'Digit3':'L3', 'KeyE':'L3', 'KeyD':'L3', 'KeyC':'L3', 'Digit4':'L4', 'Digit5':'L4', 'KeyR':'L4', 'KeyT':'L4', 'KeyF':'L4', 'KeyG':'L4', 'KeyV':'L4', 'KeyB':'L4', 'Space':'thumb', 'Digit6':'R2', 'Digit7':'R2', 'KeyY':'R2', 'KeyU':'R2', 'KeyH':'R2', 'KeyJ':'R2', 'KeyN':'R2', 'KeyM':'R2', 'Digit8':'R3', 'KeyI':'R3', 'KeyK':'R3', 'Comma':'R3', 'Digit9':'R4', 'KeyO':'R4', 'KeyL':'R4', 'Period':'R4', 'Digit0':'R5', 'Minus':'R5', 'Equal':'R5', 'KeyP':'R5', 'BracketLeft':'R5', 'BracketRight':'R5', 'Backslash':'R5', 'Semicolon':'R5', 'Quote':'R5', 'Slash':'R5', 'Backspace':'R5' };
         const requiresShift = ['ឈ','ឺ','ែ','ឬ','ទ','ួ','ូ','ី','ៅ','ភ','ឿ','ឳ','ាំ','ៃ','ឌ','ធ','អ','ះ','ញ','គ','ឡ','៖','៉','ឍ','ឃ','ជ','៌','ព','ណ','ំ','?','៕','ៗ','~','!','@','#','$','%','^','&','*','(',')','_','+','|', ' '];
 
-        const textDisplay = document.getElementById("textDisplay");
-        const typedDisplay = document.getElementById("typedDisplay");
-        const inputField = document.getElementById("inputField");
-        const timeTag = document.getElementById("time");
-        const mistakesTag = document.getElementById("mistakes");
-        const wpmTag = document.getElementById("wpm");
-        const accuracyTag = document.getElementById("accuracy");
-        const themeToggle = document.getElementById("themeToggle");
+        // ================= PHẦN TỬ DOM NORMAL MODE =================
+        const textDisplay = document.getElementById("textDisplay"), typedDisplay = document.getElementById("typedDisplay"), inputField = document.getElementById("inputField");
+        const timeTag = document.getElementById("time"), mistakesTag = document.getElementById("mistakes"), wpmTag = document.getElementById("wpm"), accuracyTag = document.getElementById("accuracy");
+        const bestWpmTag = document.getElementById("bestWpm"), progressBar = document.getElementById("progressBar");
         
-        let timer, timeElapsed = 0, mistakes = 0, isTyping = false;
-        let currentText = "", previousValue = "", isCustomMode = false;
-        let graphemes = [];
+        let timer, timeElapsed = 0, mistakes = 0, isTyping = false, currentText = "", previousValue = "", isCustomMode = false, graphemes = [];
+        let isMiniGameMode = false;
+        
+        // --- TÍNH NĂNG ĐỔI CỠ CHỮ ---
+        let currentFontSize = 30; 
+        document.getElementById("fontMinus").addEventListener("click", () => { if(currentFontSize > 20) currentFontSize -= 4; textDisplay.style.fontSize = currentFontSize + "px"; });
+        document.getElementById("fontPlus").addEventListener("click", () => { if(currentFontSize < 50) currentFontSize += 4; textDisplay.style.fontSize = currentFontSize + "px"; });
 
+        // --- TÍNH NĂNG ÂM THANH ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let isSoundOn = true;
+        
+        document.getElementById("soundToggle").addEventListener("click", function() {
+            isSoundOn = !isSoundOn;
+            this.innerText = isSoundOn ? "🔊" : "🔇";
+            this.classList.toggle("muted", !isSoundOn);
+        });
+
+        function playTone(freq, type, duration, vol=0.1) {
+            if (!isSoundOn) return;
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+            osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + duration);
+        }
+        function playClick() { playTone(800, 'sine', 0.05, 0.05); } 
+        function playError() { playTone(150, 'sawtooth', 0.2, 0.1); } 
+        function playSuccess() { playTone(400, 'sine', 0.1, 0.1); setTimeout(() => playTone(600, 'sine', 0.2, 0.1), 100); } 
+
+        // --- TÍNH NĂNG KỶ LỤC LOCALSTORAGE ---
+        let bestWpm = localStorage.getItem('khmerTypingBestWpm') || 0;
+        bestWpmTag.innerText = bestWpm;
+
+        function fireConfetti() {
+            const colors = ['#d4af37', '#10b981', '#3b82f6', '#ef4444'];
+            for(let i=0; i<60; i++) {
+                let conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 4000);
+            }
+        }
+
+        // ================= XỬ LÝ CHUYỂN ĐỔI CHẾ ĐỘ =================
+        document.getElementById('miniGameBtn').addEventListener('click', () => {
+            isMiniGameMode = true;
+            document.getElementById('normalModeUI').style.display = 'none';
+            document.getElementById('miniGameUI').style.display = 'flex';
+            resetGame(); 
+        });
+
+        document.getElementById('mgCloseBtn').addEventListener('click', () => {
+            isMiniGameMode = false;
+            endMiniGame();
+            document.getElementById('miniGameUI').style.display = 'none';
+            document.getElementById('normalModeUI').style.display = 'flex';
+            resetGame();
+        });
+
+        // ================= LOGIC MINI GAME =================
+        let mgScore = 0, mgLives = 3, mgSpawnInterval, mgSpeed = 8, mgSpawnRate = 2000;
+        let isMiniGamePlaying = false;
+        const mgBoard = document.getElementById('mgBoard');
+        const mgInput = document.getElementById('mgInput');
+
+        document.getElementById('mgStartBtn').addEventListener('click', startMiniGame);
+
+        function updateMgUI() {
+            document.getElementById('mgScoreVal').innerText = mgScore;
+            let heartStr = "";
+            for(let i=0; i<mgLives; i++) heartStr += "❤️";
+            for(let i=mgLives; i<3; i++) heartStr += "🖤";
+            document.getElementById('mgLivesVal').innerText = heartStr;
+        }
+
+        function startMiniGame() {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            isMiniGamePlaying = true;
+            document.getElementById('mgStartScreen').style.display = 'none';
+            
+            // Xóa chữ cũ
+            document.querySelectorAll('.falling-word').forEach(w => w.remove());
+            
+            // Xác định độ khó (Speed = thời gian rơi tốn bao nhiêu giây, Rate = bao lâu ra 1 chữ)
+            let diff = document.getElementById('mgDifficulty').value;
+            if (diff === 'slow') { mgSpeed = 12; mgSpawnRate = 3000; }
+            else if (diff === 'fast') { mgSpeed = 4; mgSpawnRate = 1200; }
+            else { mgSpeed = 8; mgSpawnRate = 2000; } // Normal
+            
+            mgScore = 0; mgLives = 3;
+            updateMgUI();
+            mgInput.value = '';
+            mgInput.focus();
+
+            mgSpawnInterval = setInterval(spawnWord, mgSpawnRate);
+        }
+
+        function spawnWord() {
+            let wordTxt = miniGameWordsList[Math.floor(Math.random() * miniGameWordsList.length)];
+            let wordEl = document.createElement('div');
+            wordEl.className = 'falling-word';
+            wordEl.innerText = wordTxt;
+            wordEl.style.left = Math.random() * 70 + 10 + '%'; 
+            wordEl.style.animationDuration = mgSpeed + 's';
+            
+            wordEl.addEventListener('animationend', () => {
+                if(wordEl.parentElement) {
+                    wordEl.remove();
+                    mgLives--;
+                    updateMgUI();
+                    playError();
+                    if(mgLives <= 0) gameOver();
+                }
+            });
+
+            mgBoard.appendChild(wordEl);
+        }
+
+        function gameOver() {
+            isMiniGamePlaying = false;
+            clearInterval(mgSpawnInterval);
+            document.querySelectorAll('.falling-word').forEach(w => w.remove());
+            
+            const screen = document.getElementById('mgStartScreen');
+            screen.style.display = 'flex';
+            
+            document.getElementById('ui-mg-title').innerText = currentLang === 'vi' ? translations.vi.mgGameOver : translations.km.mgGameOver;
+            document.getElementById('ui-mg-title').style.color = 'var(--incorrect-color)';
+            
+            document.getElementById('ui-mg-desc').style.display = 'none';
+            document.getElementById('ui-mg-score-display').style.display = 'block';
+            document.getElementById('ui-mg-final-score').innerText = mgScore;
+            
+            document.getElementById('mgStartBtn').innerText = currentLang === 'vi' ? translations.vi.mgReplay : translations.km.mgReplay;
+        }
+
+        function endMiniGame() {
+            isMiniGamePlaying = false;
+            clearInterval(mgSpawnInterval);
+            document.querySelectorAll('.falling-word').forEach(w => w.remove());
+            
+            const screen = document.getElementById('mgStartScreen');
+            screen.style.display = 'flex';
+            
+            document.getElementById('ui-mg-title').innerText = translations[currentLang].mgTitle;
+            document.getElementById('ui-mg-title').style.color = 'var(--gold-accent)';
+            
+            document.getElementById('ui-mg-desc').style.display = 'block';
+            document.getElementById('ui-mg-score-display').style.display = 'none';
+            document.getElementById('mgStartBtn').innerText = translations[currentLang].mgStart;
+        }
+
+        // Xử lý gõ trong Mini Game
+        mgInput.addEventListener('input', (e) => {
+            if(!isMiniGamePlaying) return;
+            let val = e.target.value.trim();
+            let words = document.querySelectorAll('.falling-word');
+            
+            for(let w of words) {
+                if(w.innerText === val) {
+                    w.remove();
+                    mgScore += 10;
+                    updateMgUI();
+                    e.target.value = '';
+                    playSuccess();
+                    
+                    // Tăng độ khó nhẹ mỗi 50 điểm
+                    if(mgScore > 0 && mgScore % 50 === 0) {
+                        mgSpeed = Math.max(3, mgSpeed - 0.5); // Nhanh nhất là 3s
+                        clearInterval(mgSpawnInterval);
+                        mgSpawnRate = Math.max(1000, mgSpawnRate - 200); // Ra chữ nhanh nhất là 1s
+                        mgSpawnInterval = setInterval(spawnWord, mgSpawnRate);
+                    }
+                    break;
+                }
+            }
+            document.querySelectorAll('.key.highlight, .finger.active-finger').forEach(el => el.classList.remove('highlight', 'active-finger'));
+        });
+
+        // Enter để xóa nhanh ô nhập Mini Game
+        mgInput.addEventListener('keydown', (e) => {
+            if(e.code === 'Enter') {
+                e.preventDefault();
+                e.target.value = '';
+            }
+        });
+
+        // ================= LOGIC GAME CỐT LÕI (NORMAL MODE) =================
         themeToggle.addEventListener("click", () => {
             const body = document.body;
             body.getAttribute("data-theme") === "dark" ? body.removeAttribute("data-theme") : body.setAttribute("data-theme", "dark");
         });
 
         document.addEventListener('keydown', (e) => {
-            if (document.activeElement !== document.getElementById("customTextInput")) inputField.focus();
+            if (document.activeElement === document.getElementById("customTextInput")) return;
+
+            if (isMiniGameMode) {
+                if (document.activeElement !== mgInput) mgInput.focus();
+            } else {
+                if (document.activeElement !== inputField) inputField.focus();
+                
+                if (e.code === 'Enter') {
+                    e.preventDefault(); 
+                    resetGame(!isCustomMode); 
+                }
+            }
+            
             let keyId = e.code;
             if (keyId === 'Space' || keyId === 'Backspace' || keyId === 'Enter') keyId = keyId;
             const keyEl = document.getElementById(keyId);
@@ -625,21 +638,19 @@
                 const levelTexts = levelsData[document.getElementById("levelSelect").value];
                 currentText = levelTexts[Math.floor(Math.random() * levelTexts.length)].replace(/\u200B/g, ''); 
             }
-            
             if (window.Intl && Intl.Segmenter) {
                 const segmenter = new Intl.Segmenter('km', { granularity: 'grapheme' });
                 graphemes = Array.from(segmenter.segment(currentText)).map(s => s.segment);
-            } else {
-                graphemes = currentText.split("");
-            }
+            } else { graphemes = currentText.split(""); }
             
             textDisplay.innerHTML = "";
             graphemes.forEach(g => textDisplay.innerHTML += `<span>${g}</span>`);
-            
             if (textDisplay.querySelectorAll("span").length > 0) textDisplay.querySelectorAll("span")[0].classList.add("active");
             
             updateKeyboardHighlight(false);
             typedDisplay.innerHTML = "&nbsp;"; 
+            progressBar.style.width = "0%"; 
+            bestWpmTag.classList.remove("new-record"); 
         }
 
         function updateKeyboardHighlight(hasError) {
@@ -657,9 +668,7 @@
 
             let charIndex = inputField.value.length;
             if (charIndex < currentText.length) {
-                let nextChar = currentText[charIndex];
-                let keyId = charToKeyId[nextChar];
-                
+                let nextChar = currentText[charIndex], keyId = charToKeyId[nextChar];
                 if (keyId) {
                     let keyEl = document.getElementById(keyId);
                     if (keyEl) keyEl.classList.add('highlight');
@@ -700,19 +709,20 @@
             for (let i = 0; i < typedText.length; i++) {
                 if (typedText[i] !== currentText[i]) { firstError = i; break; }
             }
+            
+            let hasError = firstError !== -1;
 
-            if (firstError !== -1 && typedText.length > firstError + 1) {
+            if (hasError && typedText.length > firstError + 1) {
                 inputField.value = previousValue; typedText = previousValue;
-            } else if (typedText.length > previousValue.length && firstError === typedText.length - 1) {
-                mistakes++;
+            } else if (typedText.length > previousValue.length) {
+                if (firstError === typedText.length - 1) { mistakes++; playError(); }
+                else { playClick(); }
             }
 
             previousValue = typedText;
             typedDisplay.innerText = typedText;
             if (typedText.length === 0) typedDisplay.innerHTML = "&nbsp;";
 
-            let hasError = firstError !== -1;
-            
             if (hasError) typedDisplay.classList.add("error");
             else typedDisplay.classList.remove("error");
 
@@ -720,35 +730,35 @@
             let currentLen = 0;
             let spans = textDisplay.querySelectorAll("span");
 
+            progressBar.style.width = (charIndex / currentText.length) * 100 + "%";
+
             spans.forEach((span, index) => {
-                let gLen = graphemes[index].length;
-                let gStart = currentLen;
-                let gEnd = currentLen + gLen;
-
+                let gLen = graphemes[index].length, gStart = currentLen, gEnd = currentLen + gLen;
                 span.classList.remove("active", "correct", "incorrect", "partial");
-
-                if (hasError && firstError >= gStart && firstError < gEnd) {
-                    span.classList.add("incorrect");
-                    span.classList.add("active");
-                }
-                else if (!hasError && charIndex >= gEnd) {
-                    span.classList.add("correct");
-                }
-                else if (!hasError && charIndex > gStart && charIndex < gEnd) {
-                    span.classList.add("partial");
-                    span.classList.add("active");
-                }
-                else if (!hasError && charIndex === gStart) {
-                    span.classList.add("active");
-                }
-
+                if (hasError && firstError >= gStart && firstError < gEnd) { span.classList.add("incorrect", "active"); }
+                else if (!hasError && charIndex >= gEnd) { span.classList.add("correct"); }
+                else if (!hasError && charIndex > gStart && charIndex < gEnd) { span.classList.add("partial", "active"); }
+                else if (!hasError && charIndex === gStart) { span.classList.add("active"); }
                 currentLen = gEnd;
             });
 
             updateKeyboardHighlight(hasError);
             calculateStats(charIndex);
 
-            if (typedText === currentText) { clearInterval(timer); inputField.blur(); }
+            if (typedText === currentText) { 
+                clearInterval(timer); 
+                inputField.blur(); 
+                playSuccess();
+                
+                let finalWpm = parseInt(wpmTag.innerText);
+                if (finalWpm > bestWpm && !isCustomMode) {
+                    bestWpm = finalWpm;
+                    localStorage.setItem('khmerTypingBestWpm', bestWpm);
+                    bestWpmTag.innerText = bestWpm;
+                    bestWpmTag.classList.add("new-record");
+                    fireConfetti();
+                }
+            }
         }
 
         function updateTimer() {
@@ -774,11 +784,12 @@
             previousValue = ""; inputField.value = ""; timeTag.innerText = "00:00";
             wpmTag.innerText = 0; mistakesTag.innerText = 0; accuracyTag.innerText = "100%";
             typedDisplay.classList.remove("error");
-            loadText(); inputField.focus();
+            loadText(); 
+            if(!isMiniGameMode) inputField.focus();
         }
 
         document.getElementById("levelSelect").addEventListener("change", () => resetGame(true));
-        document.getElementById("resetBtn").addEventListener("click", () => resetGame(isCustomMode ? false : true));
+        document.getElementById("resetBtn").addEventListener("click", () => resetGame(!isCustomMode));
         inputField.addEventListener("input", initTyping);
         
         document.getElementById("toggleCustomBtn").addEventListener("click", () => {
